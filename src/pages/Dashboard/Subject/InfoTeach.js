@@ -37,6 +37,7 @@ const options =[
 const InfoTeach = () => {
   const [option,setOption] = useState(options);
   let dispatch = useDispatch();
+
   const onSubmit = (values) => {
     const setValues = option.find(v=>v.value === values.occupation);
     const optional = option.filter(item => item !== setValues);
@@ -46,9 +47,6 @@ const InfoTeach = () => {
     dispatch(loadRegis());
     
   };
-
-  
-  
 
   return (
     <Grid container justifyContent="center" spacing={1}>
