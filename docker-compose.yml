@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+
+
+  frontend:
+    image: node:16
+    container_name: frontend
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3002:3000"
+    command: npm run start
