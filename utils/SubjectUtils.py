@@ -4,9 +4,12 @@ class SubjectUtils:
     def format_subject(self, subject) -> SubjectCreate:
         return {
             "id": str(subject['_id']),
+            "mamon": subject['mamon'],
             "name": subject['name'],
             "faculity": subject['faculity'],
-            "teacher": subject['teacher']
+            "teacher": subject['teacher'],
+            "sotinchi": subject['sotinchi'],
+            "time": subject['time']
 
         }
     
@@ -15,7 +18,8 @@ class SubjectUtils:
             # "id": str(subject['_id']),
             "name": subject['name'],
             "faculity": subject['faculity'],
-            "teacher": subject['teacher']
+            "teacher": subject['teacher'],
+             "sotinchi": subject['sotinchi']
 
         }
 # class SubjectCreate(BaseModel):
