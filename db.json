@@ -27,22 +27,20 @@
     {
       "email": "anh@gmail.com",
       "password": "1234",
-      "id": 1
+      "type": 0
     },
     {
-      "email": "demo@minimals.cc",
-      "password": "123",
-      "id": 2
+      "email": "amy@gmail.com",
+      "password": "123123",
+      "type": 1
     }
   ],
-  "info": [
-    {
-      "address": " Hà Nội",
-      "phone": "097123452",
-      "birthday": "2000-10-11",
-      "id": 1
-    }
-  ],
+  "info": {
+    "namePerson": "Nguyen Thi B",
+    "address": "Hà Nội",
+    "phone": 936200032,
+    "birthday": "2022-03-09"
+  },
   "transcript": [
     {
       "id": 1,
@@ -165,7 +163,7 @@
       "point": "B"
     }
   ],
-  "subject": [
+  "subjects": [
     {
       "id": "AB10",
       "subject": "An toàn và bảo mật thông tin",
@@ -236,6 +234,7 @@
       "id": "1",
       "name": "Chuyên mục học từ sự kiện số tháng 11",
       "color": "#1976d2",
+      "coloR": "primary",
       "status": "false",
       "when": "00:00 29/11/21 - 23:59 03/12/21",
       "where": "Microsoft Forms",
@@ -251,6 +250,7 @@
       "id": "2",
       "name": "Hội thảo hướng nghiệp ,giới thiệu việc làm ",
       "color": "#d32f2f",
+      "coloR": "error",
       "status": "false",
       "when": "15:00 06/01/22- 17:00 06/01/22 ",
       "where": "Online Ms Teams",
@@ -266,6 +266,7 @@
       "id": "3",
       "name": "Kiểm tra quy chế kì 20211 cho sinh viên K66",
       "color": "#ED6C02",
+      "coloR": "warning",
       "status": "false",
       "when": "00:00 21/12/21 - 00:00 22/01/22",
       "where": "",
@@ -281,6 +282,7 @@
       "id": "4",
       "name": "Tham gia hiến máu nhân đạo kì 20211 ĐHBKHN",
       "color": "#2e7d32",
+      "coloR": "success",
       "status": "false",
       "when": "00:00 25/07/21 - 23:59 31/01/22",
       "where": "Các địa điểm hiến máu hợp pháp",
@@ -296,6 +298,7 @@
       "id": "5",
       "name": "Giải chạy 1000 Bước chân vì sức khỏe mỗi ngày lần thứ hai",
       "color": "#9c27b0",
+      "coloR": "secondary",
       "status": "false",
       "when": "00:00 08/11/21 - 23:59 31/01/22",
       "where": "Nơi ở",
@@ -311,6 +314,7 @@
       "id": "6",
       "name": "Chuyên mục học từ lịch sử số tháng 1",
       "color": "#0288d1",
+      "coloR": "primary",
       "status": "false",
       "when": "00:00 09/01/22 - 23:59 29/01/22",
       "where": "Microsoft Forms",
@@ -321,6 +325,101 @@
       "how": "Truy cập vào link để trả lời các câu hỏi",
       "morehow": "Sử dụng mail hust để tham gia. Mỗi một mail được tham gia hoạt động số tháng 11/2021 một lần duy nhất ",
       "accept": "BTC phê duyệt điểm rèn luyện cho các sinh viên đạt 80 điểm trở lên trong đúng thời gian diễn ra cuộc thi, thời lượng mỗi cá nhân có thời lượng truy cập tối thiểu 4 phút 30s"
+    }
+  ],
+  "TeacherSubject": [
+    {
+      "id": "QTTT20211",
+      "subjectName": "Quản trị thông tin",
+      "subjectStatus": 0,
+      "students": [
+        {
+          "name": "Student A",
+          "id": 1,
+          "midscore": 9,
+          "endscore": "3"
+        },
+        {
+          "name": "Student B",
+          "id": 2,
+          "midscore": "3",
+          "endscore": 5
+        },
+        {
+          "name": "Student C",
+          "id": 3,
+          "midscore": "8",
+          "endscore": 8.5
+        },
+        {
+          "name": "Student D",
+          "id": 4,
+          "midscore": "2",
+          "endscore": "7"
+        }
+      ]
+    },
+    {
+      "id": "GT20211",
+      "subjectName": "Giải tích 1",
+      "subjectStatus": 1,
+      "students": [
+        {
+          "name": "Student A",
+          "id": 1,
+          "midscore": 9,
+          "endscore": "3"
+        },
+        {
+          "name": "Student B",
+          "id": 2,
+          "midscore": "3",
+          "endscore": 5
+        },
+        {
+          "name": "Student C",
+          "id": 3,
+          "midscore": 3,
+          "endscore": 8.5
+        },
+        {
+          "name": "Student D",
+          "id": 4,
+          "midscore": "2",
+          "endscore": "7"
+        }
+      ]
+    },
+    {
+      "id": "HPT20211",
+      "subjectName": "Hệ phân tán",
+      "subjectStatus": 3,
+      "students": [
+        {
+          "name": "Student A",
+          "id": 1,
+          "midscore": 9,
+          "endscore": "3"
+        },
+        {
+          "name": "Student B",
+          "id": 2,
+          "midscore": "3",
+          "endscore": "4"
+        },
+        {
+          "name": "Student C",
+          "id": 3,
+          "midscore": 3,
+          "endscore": 8.5
+        },
+        {
+          "name": "Student D",
+          "id": 4,
+          "midscore": "2",
+          "endscore": "3"
+        }
+      ]
     }
   ]
 }

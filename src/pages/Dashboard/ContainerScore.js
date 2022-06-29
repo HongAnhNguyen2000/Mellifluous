@@ -1,13 +1,17 @@
 import { ThemeProvider } from '@mui/private-theming'
-import React from 'react'
+import React,{useEffect} from 'react'
+
+import {Box, Container, Toolbar, CssBaseline} from '@mui/material'
+
+
 import DashboardContent from './Dashboard'
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
 import EnhancedTable from './Score';
+import TeacherScore from '../../components/TeacherScore';
+
 
 const ContainerScore = () => {
+     const getRole = localStorage.getItem('accountInfo');
+
     return (
         <ThemeProvider>
          <Box sx={{ display: 'flex' }}>
@@ -27,7 +31,13 @@ const ContainerScore = () => {
       >
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <EnhancedTable/>
+          { getRole === '0' ? 
+            <EnhancedTable/>
+            :
+            <TeacherScore/>
+          }
+       
+       
         </Container>
       </Box>
     </Box>

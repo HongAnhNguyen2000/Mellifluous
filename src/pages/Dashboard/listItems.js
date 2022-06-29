@@ -29,6 +29,9 @@ import { IconButton } from '@mui/material';
  })
 const MainListItems = () =>{
   let history = useHistory();
+
+  const getRole = localStorage.getItem('accountInfo');
+
   const classes = useStyles()
   return(
   <div>
@@ -39,12 +42,16 @@ const MainListItems = () =>{
     </Avatar>
       <ListItemText primary="Thông tin cá nhân" />
     </ListItem>
+    
     <ListItem button className={classes.button} onClick={()=> history.push("/score")}>
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <BarChartIcon />
     </Avatar>
       <ListItemText primary="Kết quả học tập" />
     </ListItem>
+
+    {getRole === '0' && (
+      <>
     <ListItem button className={classes.button} onClick={()=> history.push("/subject")}>
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black'  }}>
         <DashboardIcon />
@@ -58,6 +65,8 @@ const MainListItems = () =>{
     </Avatar>
       <ListItemText primary="Điểm rèn luyện" />
     </ListItem>
+    </>    
+    )}
   </div>
 );
 

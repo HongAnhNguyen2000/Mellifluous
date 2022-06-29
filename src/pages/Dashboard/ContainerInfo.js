@@ -13,6 +13,9 @@ import Toolbar from '@mui/material/Toolbar';
 
 
 const ContainerInfo = () => {
+
+  const getRole = localStorage.getItem('accountInfo');
+
     return (
      
         <ThemeProvider>
@@ -47,12 +50,14 @@ const ContainerInfo = () => {
                 }}
               >
                 
-                <SelfInfo/>
+                <SelfInfo getRole= {getRole}/>
+                
                 
               </Paper>
             </Grid>
             
-            {/* Health Info */}
+            {getRole === '0' &&(
+           
             <Grid item xs={12} md={12} lg={4}>
               <Paper
                 sx={{
@@ -64,6 +69,7 @@ const ContainerInfo = () => {
                 <HealthInfo/>
               </Paper>
             </Grid>
+            )}
             </Grid>
         </Container>
       </Box>

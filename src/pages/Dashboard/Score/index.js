@@ -1,55 +1,26 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { alpha } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import TableSortLabel from "@mui/material/TableSortLabel";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
+import {
+  Box,
+  alpha,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TableSortLabel,
+  Toolbar,
+  Typography,
+  Paper,
+  FormControlLabel,
+  Switch,
+} from "@mui/material";
 
+import { useDispatch, useSelector } from "react-redux";
 import { visuallyHidden } from "@mui/utils";
-
-function createData(name, midterm, endterm, endpoint, point) {
-  return {
-    name,
-    midterm,
-    endterm,
-    endpoint,
-    point,
-  };
-}
-
-const rows = [
-  createData("Cấu trúc dữ liệu và giải thuật", 7, 7, 7.0, "B"),
-  createData("Toán rời rạc", 6, 6, 6.0, "C"),
-  createData("Nhập môn Java", 9, 9, 9.0, "A"),
-  createData("Cơ sở dữ liệu", 5, 7, 7.0, "B"),
-  createData("Giải tích III", 4, 6, 6.0, "C"),
-  createData("Giải tích I", 10, 9, 9.0, "A"),
-  createData("Kiến trúc máy tính", 4, 7, 7.0, "B"),
-  createData("Linux và phần mềm nguồn mở", 3, 6, 6.0, "C"),
-  createData("Xử lý tín hiệu số", 4, 9, 9.0, "A"),
-  createData("Project I", 7, 7, 7.0, "B"),
-  createData("Thực tập ", 9, 6, 6.0, "C"),
-  createData("Xác suất thống kê", 8, 9, 9.0, "A"),
-];
-// const Rows = ()=>{
-//   const {transcripts}= useSelector(state =>state.data);
-//   console.log(transcripts);
-//   let dispatch = useDispatch();
-//   useEffect(()=>{
-//     dispatch(getTranscripts());
-//   })
-// }
+import { loadTranscripts } from "../../../redux/_api/api";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -67,8 +38,7 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
+
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -190,9 +160,9 @@ const EnhancedTableToolbar = () => {
 };
 
 export default function EnhancedTable() {
+  let dispatch = useDispatch();
   const [order, setOrder] = React.useState("asc");
   const [orderBy, setOrderBy] = React.useState("endpoint");
-  //   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -215,10 +185,16 @@ export default function EnhancedTable() {
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
+  const {transcripts}= useSelector(state =>state.transcript);
+ 
+  useEffect(()=>{
+    dispatch(loadTranscripts())
+  },[])
+
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - transcripts.length) : 0;
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -234,12 +210,10 @@ export default function EnhancedTable() {
               order={order}
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={transcripts.length}
             />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(transcripts, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
@@ -275,9 +249,9 @@ export default function EnhancedTable() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10,15,20, 25]}
+          rowsPerPageOptions={[5,10,15]}
           component="div"
-          count={rows.length}
+          count={transcripts.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

@@ -25,16 +25,8 @@ import { makeStyles } from "@mui/styles";
 
 import axios from "axios";
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
-  marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
+import { useDispatch, useSelector } from "react-redux";
+import { loadExtras, loadAsyncExtras} from "../../redux/_api/api";
 
 const useStyles = makeStyles(() => ({
   StyledBackground: {
@@ -48,27 +40,45 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ContainerExtra = () => {
-  const [expanded, setExpanded] = React.useState(false);
+  let dispatch = useDispatch();
   const [data, setData] = React.useState();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(false);
+  const [error, setError] = React.useState("")
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+    if (reason !== "clickaway") {
+      setState(false);
     }
+  };
 
-    setState(false);
-  };
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+
   const GetShow = (id) => {
-    axios.get(`http://localhost:5001/extra/${id}`).then((resp) => {
-      setData(resp.data);
-    });
+    console.log(id);
+    axios
+      .get(`http://localhost:5001/extra/${id}`)
+      .then((resp) => {
+        setData(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
-  useEffect(GetShow, []);
+
+  const { extra } = useSelector((state) => state.extra);
+
+
+ 
+  useEffect(() => {
+     dispatch(loadExtras((data) => {
+      console.log("data: ", data)
+    }, (error) => {
+      console.log("error === : ", error)
+
+    })
+    )
+  }, []);
+
 
   return (
     <ThemeProvider>
@@ -92,6 +102,7 @@ const ContainerExtra = () => {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               <Grid item xs={12} md={12} lg={12}>
+                <h1>{error}</h1>
                 <Stack
                   direction="row"
                   alignItems="center"
@@ -107,136 +118,42 @@ const ContainerExtra = () => {
                         position: "absolute",
                         width: "88%",
                         left: "6%",
-                        top: "25%",
+                        top: "17%",
                       }}
                     >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => GetShow(1)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Chuyên mục học từ sự kiện số tháng 11
-                            <br />
-                            23:59 02/12/21
-                          </Typography>
-                        </Stack>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="error"
-                        onClick={() => GetShow(2)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Hội thảo hướng nghiệp, giới thiệu việc làm
-                            <br />
-                            17:00 06/01/22
-                          </Typography>
-                        </Stack>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="warning"
-                        onClick={() => GetShow(3)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Kiểm tra quy chế kì 20211 cho sinh viên K66
-                            <br />
-                            00:00 22/01/22
-                          </Typography>
-                        </Stack>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="success"
-                        onClick={() => GetShow(4)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Tham gia hiến máu nhân đạo kì 20211 ĐHBKHN
-                            <br />
-                            23:59 30/01/22
-                          </Typography>
-                        </Stack>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={() => GetShow(5)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Giải chạy 1000 bước chân vì sức khỏe mỗi ngày lần
-                            thứ hai
-                            <br />
-                            23:59 30/01/22
-                          </Typography>
-                        </Stack>
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="info"
-                        onClick={() => GetShow(6)}
-                      >
-                        <Stack
-                          direction="row"
-                          spacing={2}
-                          justifyContent="center"
-                          alignItems="center"
-                        >
-                          <FavoriteIcon />
-                          <Typography variant="caption">
-                            {" "}
-                            Chuyên mục học từ lịch sử số tháng 1
-                            <br />
-                            23:59 02/02/22
-                          </Typography>
-                        </Stack>
-                      </Button>
+                      {extra &&
+                        extra.map((item) => (
+                          <Button
+                            variant="contained"
+                            color={item.coloR}
+                            key={item.id}
+                            onClick={() => GetShow(item.id)}
+                          >
+                            <Stack
+                              direction="row"
+                              spacing={2}
+                              justifyContent="center"
+                              alignItems="center"
+                            >
+                              <FavoriteIcon />
+                             <Stack direction="column">
+                              <Typography variant="caption">
+                                {item.name}
+                              </Typography>
+                              <Typography>
+                                {item.deadline}
+                              </Typography>
+                              </Stack>
+                            </Stack>
+                          </Button>
+                        ))}
                     </Stack>
+
                     <img
                       src="/static/extra/background.png"
                       className={classes.StyledBackground}
                     />
-                    <img src="/static/extra/iphoneframe.png" alt="" />
+                    <img src="https://i.pinimg.com/564x/71/39/31/713931058d5a8caedd3af581c46d0dff.jpg" alt="" />
                   </Box>
                   {data && (
                     <Box
@@ -293,10 +210,12 @@ const ContainerExtra = () => {
 
                         <Button
                           variant="contained"
+                          
                           onClick={() => setOpen(true)}
                           sx={{
                             backgroundColor: data.color,
                             marginBottom: "10px",
+                            marginLeft: "30%"
                           }}
                         >
                           Nộp minh chứng

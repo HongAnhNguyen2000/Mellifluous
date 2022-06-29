@@ -17,7 +17,7 @@ import {
   Alert
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { loadRegis, regisDelete } from "../../../redux/action";
+import { loadRegis, regisDelete } from "../../../redux/_api/api";
 import { styled } from "@mui/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -38,7 +38,7 @@ function TransitionLeft(props){
 
 const FinalSub = () => {
   let dispatch = useDispatch();
-  const { regis } = useSelector((state) => state.data);
+  const { regis } = useSelector((state) => state.regis);
  
   useEffect(() => {
     dispatch(loadRegis());
@@ -53,9 +53,8 @@ const FinalSub = () => {
   const [open, setOpen] = React.useState(false);
   const [transition, setTransition] = React.useState(undefined);
   const GetId = regis.map((regi)=>regi.id);
-  console.log(GetId);
-  // const [regiser,setRegis]= React.useState(regis);
-  // console.log(regiser);
+  
+ 
 
   const onHandleClick = (Transition) => (e) => {
     setTransition(() => Transition);

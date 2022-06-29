@@ -13,12 +13,11 @@ import {
   Typography,
   Collapse,
 } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSubjects } from "../../../redux/action";
+import { loadSubjects } from "../../../redux/_api/api";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -38,10 +37,14 @@ const InfoSub = () => {
   }, []);
 
   const [open, setOpen] = React.useState(false);
+  const [openId, setOpenId] = React.useState(0);
+
   const onOpenButton = (id) => {
     setOpen(!open);
+    setOpenId(id)
     console.log(id);
   };
+  console.log(subjects)
 
   return (
     <Stack direction="row" spacing={2}>
@@ -71,21 +74,22 @@ const InfoSub = () => {
                 <TableRow>
                   <TableCell>
                     <Button onClick={() => onOpenButton(subject.id)}>
-                      <KeyboardArrowUpIcon />
+                      Detail
                     </Button>
                   </TableCell>
                   <TableCell component="th" scope="row" align="center">
-                    {subject.id}
+                    {subject.mamon}
                   </TableCell>
-                  <TableCell align="center">{subject.subject}</TableCell>
-                  <TableCell align="center">{subject.credit}</TableCell>
-                  <TableCell align="center">{subject.timing}</TableCell>
+                  <TableCell align="center">{subject.name}</TableCell>
+                  <TableCell align="center">{subject.sotinchi}</TableCell>
+                  <TableCell align="center">{subject.time}</TableCell>
                 </TableRow>
                 <TableRow>
                   <TableCell
                     style={{ paddingBottom: 0, paddingTop: 0 }}
                     colSpan={6}
                   >
+                    {openId === subject.id && (
                     <Collapse in={open} timeout="auto" unmountOnExit>
                       <Box sx={{ margin: 1 }}>
                         <Typography variant="h6" gutterBottom component="div">
@@ -96,7 +100,7 @@ const InfoSub = () => {
                             <TableRow>
                               <TableCell>Tên giảng viên</TableCell>
                               <TableCell>Bộ môn</TableCell>
-                              <TableCell align="right">Amount</TableCell>
+                              <TableCell align="right">Kì học</TableCell>
                             </TableRow>
                           </TableHead>
                           <TableBody>
@@ -104,13 +108,14 @@ const InfoSub = () => {
                               <TableCell component="th" scope="row">
                                 {subject.teacher}
                               </TableCell>
-                              <TableCell>{subject.faculty}</TableCell>
-                              <TableCell align="right">4</TableCell>
+                              <TableCell>{subject.faculity}</TableCell>
+                              <TableCell align="right">{subject.semester}</TableCell>
                             </TableRow>
                           </TableBody>
                         </Table>
                       </Box>
                     </Collapse>
+                    )}
                   </TableCell>
                 </TableRow>
               </TableBody>

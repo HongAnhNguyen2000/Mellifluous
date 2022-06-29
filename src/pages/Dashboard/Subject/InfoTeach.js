@@ -14,7 +14,7 @@ import {
   TextField
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { regisAdd, loadRegis } from "../../../redux/action";
+import { regisAdd, loadRegis } from "../../../redux/_api/api";
 import { Formik, Form } from "formik";
 
 //Data
@@ -24,14 +24,14 @@ const initialValues = {
 };
 
 const options =[
-  {id:1, label: "AB10-An toàn thông tin", value: "AB10", credits: 3},
+  {id:1, label: "AB10-Toán cao cấp", value: "AB10", credits: 3},
   {id:2, label: "IT20-ProjectII", value: "IT20", credits: 4 },
   {id:3, label: "IT30-ProjectIII", value: "IT30", credits: 4 },
-  {id:4, label: "GT10-Giải tích I", value: "GT10", credits:5 },
-  {id:5, label: "GT20-Giải tích II", value: "GT20", credits: 4 },
-  {id:6, label: "GT21-Giải tích II", value: "GT21", credits: 3 },
-  {id:7, label: "GT270-Giải tích II", value: "GT270", credits: 3 },
-  {id:8, label: "GT80-Giải tích II", value: "GT80", credits: 3 },
+  {id:4, label: "GT10-Giải tích 1", value: "GT10", credits:5 },
+  {id:5, label: "GT20-Giải tích 2", value: "GT20", credits: 5 },
+  {id:6, label: "GT21-Giải tích 2", value: "GT21", credits: 5 },
+  {id:7, label: "IT7-Hệ phân tán", value: "IT7", credits: 2 },
+  {id:8, label: "IT8-Cấu trúc dữ liệu và giải thuật", value: "IT8", credits: 3 },
 ];
 
 const InfoTeach = () => {
