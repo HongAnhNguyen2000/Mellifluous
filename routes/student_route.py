@@ -15,6 +15,7 @@ def get_all_student():
     res = StudentService().get_all_student()
     return res
 
+
 @router.put('/update_subject/{id}', response_model=Student)
 def update_student(id: str, student: UpdatedStudent = Body(...)):
     res = StudentService().update_student(id, student)

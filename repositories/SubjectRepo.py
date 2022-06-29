@@ -23,6 +23,11 @@ class SubjectRepo(BaseRepo):
         
         return list1
     
+    def get_subject_by_id(self, id:str):
+        res = self.collection.find_one({'_id': id})
+        res = SubjectUtils().format_subject(res)
+        return res
+    
     def update_subject(self, id: str, subj: UpdateSubjectModel = Body(...)):
         subject = {k: v for k, v in subj.dict().items() if v is not None}
         if len(subject) >=1:

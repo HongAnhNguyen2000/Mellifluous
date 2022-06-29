@@ -19,6 +19,10 @@ class SubjectService:
         res = self.repo.get_all_subjects()
         return res
     
+    def get_subject_by_id(self, id:str):
+        res = self.repo.get_subject_by_id(id)
+        return res
+    
     def update_subject(self, id: str, student: UpdateSubjectModel = Body(...)):
         res = self.repo.update_subject(id, student)
         return res
