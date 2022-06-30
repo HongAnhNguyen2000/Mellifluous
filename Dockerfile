@@ -1,5 +1,5 @@
 FROM node:8.6-slim
-WORKDIR /usr/src/App
+WORKDIR /usr/src/app
 # Copy across client package.json
 RUN mkdir client
 COPY ./client/package.json client/package.json
