@@ -19,6 +19,7 @@ class StudentCourseService:
         # try:
             res = self.repo.create_course(id_subj, id_student)
             print('Success')
+
             return res
         
     def get_course(self):

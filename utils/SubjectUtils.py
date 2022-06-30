@@ -8,14 +8,8 @@ class SubjectUtils:
             "name": subject['name'],
             "faculity": subject['faculity'],
             "teacher": subject['teacher'],
-<<<<<<< HEAD
             "sotinchi": str(subject['sotinchi']),
             "time": subject['time']
-=======
-            "sotinchi": subject['sotinchi'],
-            "time": subject['time'],
-            "semester": subject['semester'],
->>>>>>> df9b3ec34b398b250e5dcab0c1d08865d09f0884
 
         }
     
