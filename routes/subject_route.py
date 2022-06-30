@@ -15,6 +15,11 @@ def get_all_subject():
     res = SubjectService().get_all_subject()
     return res
 
+@router.get('/get_by_id/{id}')
+def get_subject_by_id(id:str):
+    res = SubjectService().get_subject_by_id(id)
+    return res
+
 @router.put('/update_subject/{id}', response_model=SubjectCreate)
 def update_subject(id: str, student: UpdateSubjectModel = Body(...)):
     res = SubjectService().update_subject(id, student)
