@@ -1,28 +1,5 @@
 {
-  "regis": [],
-  "user": [
-    {
-      "name": "Adam",
-      "address": "London",
-      "email": "adam@gmail.com",
-      "contact": "8367367",
-      "id": 1
-    },
-    {
-      "name": "Tommy Brown",
-      "address": "Japan",
-      "email": "tommy@gmail.com",
-      "contact": "837866464",
-      "id": 2
-    },
-    {
-      "name": "Amy",
-      "email": "amy@gmail.com",
-      "contact": "23456789",
-      "address": "Vietnam",
-      "id": 3
-    }
-  ],
+
   "account": [
     {
       "email": "anh@gmail.com",
@@ -163,72 +140,7 @@
       "point": "B"
     }
   ],
-  "subjects": [
-    {
-      "id": "AB10",
-      "subject": "An toàn và bảo mật thông tin",
-      "teacher": "THS.Bùi Trọng Tùng",
-      "timing": "Fri 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 3
-    },
-    {
-      "id": "IT20",
-      "subject": " Project II",
-      "teacher": "THS. Nguyen Van B",
-      "timing": "Mon 12:30PM-3PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 4
-    },
-    {
-      "id": "IT30",
-      "subject": " Project III",
-      "teacher": "THS. Nguyen Van C",
-      "timing": "Wed 3PM-4:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 4
-    },
-    {
-      "id": "GT10",
-      "subject": " Giải tích 1",
-      "teacher": "THS. Nguyen Van D",
-      "timing": "Tue 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 5
-    },
-    {
-      "id": "GT20",
-      "subject": " Giải tích 2",
-      "teacher": "THS. Nguyen Van E",
-      "timing": "Thu 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 4
-    },
-    {
-      "id": "GT21",
-      "subject": " Giải tích 2",
-      "teacher": "THS. Nguyen Van E",
-      "timing": "Thu 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 3
-    },
-    {
-      "id": "IT7",
-      "subject": " Giải tích 2",
-      "teacher": "THS. Nguyen Van E",
-      "timing": "Thu 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 3
-    },
-    {
-      "id": "IT8",
-      "subject": " Giải tích 2",
-      "teacher": "THS. Nguyen Van E",
-      "timing": "Thu 4PM-5:30PM",
-      "faculty": "Truyền thông và mạng máy tính",
-      "credit": 3
-    }
-  ],
+
   "extra": [
     {
       "id": "1",

@@ -50,7 +50,7 @@ const InfoTeach = () => {
 
   return (
     <Grid container justifyContent="center" spacing={1}>
-      <Grid item md={10}>
+      <Grid item md={12}>
         <Card
           // justifyContent="center"
           // alignItems="center"

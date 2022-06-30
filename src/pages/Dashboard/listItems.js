@@ -1,18 +1,18 @@
 import * as React from 'react';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
+
 import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+
 import { Avatar } from '@mui/material';
-import { IconButton } from '@mui/material';
+
  import { useHistory } from 'react-router';
- import { Button } from '@mui/material';
+
  import { makeStyles } from '@mui/styles';
 
  const useStyles = makeStyles({
@@ -50,7 +50,9 @@ const MainListItems = () =>{
       <ListItemText primary="Kết quả học tập" />
     </ListItem>
 
-    {getRole === '0' && (
+    
+
+    {getRole === '0' ? (
       <>
     <ListItem button className={classes.button} onClick={()=> history.push("/subject")}>
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black'  }}>
@@ -65,7 +67,19 @@ const MainListItems = () =>{
     </Avatar>
       <ListItemText primary="Điểm rèn luyện" />
     </ListItem>
+
+
     </>    
+    ):
+    (
+      <>
+      <ListItem button className={classes.button} onClick={()=> history.push("/manageSubject")}>
+      <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
+          <LayersIcon />
+      </Avatar>
+        <ListItemText primary="Quản lý môn học" />
+      </ListItem>
+    </>
     )}
   </div>
 );

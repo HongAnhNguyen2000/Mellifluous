@@ -83,8 +83,8 @@ const FinalSub = () => {
 
   
   return (
-    <Grid container justifycontent="center" spacing={1}>
-      <Grid item md={10}>
+    <Grid container justifycontent="center" spacing={1} >
+      <Grid item md={12} sx={{paddingLeft: '0 !important' }} >
         <Card
           justifycontent="center"
           alignitems="center"

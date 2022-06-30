@@ -31,10 +31,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const InfoSub = () => {
   let dispatch = useDispatch();
-  const { subjects } = useSelector((state) => state.data);
+
+  const { subjects } = useSelector((state) => state.subject);
+
   useEffect(() => {
     dispatch(loadSubjects());
   }, []);
+
+ 
 
   const [open, setOpen] = React.useState(false);
   const [openId, setOpenId] = React.useState(0);
@@ -44,7 +48,7 @@ const InfoSub = () => {
     setOpenId(id)
     console.log(id);
   };
-  console.log(subjects)
+
 
   return (
     <Stack direction="row" spacing={2}>

@@ -18,6 +18,9 @@ const subjectReducers = (state = initialState, action) =>{
               subject: action.payload,
               loading: false,
             };
+          case 'DELETE_SUB' : 
+            return state.filter((item) => item.id !== action.id)
+            
         default:
             return state
     }

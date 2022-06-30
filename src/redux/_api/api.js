@@ -71,9 +71,10 @@ export const loadTranscripts = () => {
 export const loadSubjects = () => {
   return function (dispatch) {
     axios
-      .get("http://localhost:5001/subjects")
+      .get("http://localhost:8000/subject/get_all")
       .then((resp) => {
         dispatch(action.subGet(resp.data));
+        console.log(resp.data)
       })
       .catch((error) => console.log(error));
   };
@@ -88,6 +89,16 @@ export const getSub = (id) => {
       .catch((error) => console.log(error));
   };
 };
+
+export const deleteSub = (id) => {
+  return function (dispatch) {
+    axios.delete(`http://localhost:8000/subject/delete_subject/${id}`)
+    .then(() => {
+      dispatch(action.deleRegis(id));
+    })
+    .catch((error) =>console.log(error) )
+  }
+}
 
 //regis
 export const regisAdd = (regis) => {

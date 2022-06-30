@@ -9,3 +9,9 @@ export const getEachSub = (subject) => ({
     type: 'GET_SUB',
     payload: subject,
   });
+
+//DELETE_SUBJECT
+export const subDelete = (id) => ({
+  type: "DELETE_SUB",
+  id: id
+})
