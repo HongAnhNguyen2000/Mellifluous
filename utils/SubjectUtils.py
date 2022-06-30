@@ -9,7 +9,8 @@ class SubjectUtils:
             "faculity": subject['faculity'],
             "teacher": subject['teacher'],
             "sotinchi": subject['sotinchi'],
-            "time": subject['time']
+            "time": subject['time'],
+            "semester": subject['semester'],
 
         }
     
