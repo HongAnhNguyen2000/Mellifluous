@@ -11,6 +11,7 @@ export const getEachSub = (subject) => ({
   });
 
 //DELETE_SUBJECT
+
 export const subDelete = (id) => ({
   type: "DELETE_SUB",
   id: id
