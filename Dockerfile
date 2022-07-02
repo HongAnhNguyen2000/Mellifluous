@@ -1,8 +1,8 @@
-FROM python:3.8
+FROM python:3.9
 
 ENV PORT 8000
 
-FROM python:3.6.9
+FROM python:3.9.2
 RUN mkdir /app
 WORKDIR /app
 
