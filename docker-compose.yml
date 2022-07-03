@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  api:
+    image: vimagick/json-server
+    command: -H 0.0.0.0 -p 5001 -w db.json
+    restart: always
+    container_name: api
+    working_dir: /usr/src/app # thư mục lưu trữ 
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "5001:5001"
+    
+
+
+  client:
+    image: node:16
+    container_name: client
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "3000:3000"
+    command: npm run start
