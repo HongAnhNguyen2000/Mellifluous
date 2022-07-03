@@ -1,16 +1,15 @@
 
-FROM python:3.8-alpine
+FROM python
 
-# RUN pip install --upgrade pip 
-RUN apt-get update
+RUN pip install --upgrade pip
 
-WORKDIR /docker
+RUN mkdir /code
+WORKDIR /code
 
-COPY requirements.txt /docker/requirements.txt
-RUN pip install --upgrade pip && pip install -r requirements.txt
-COPY . .
+COPY requirements.txt /code/
+RUN  pip freeze > requirements.txt
 
-EXPOSE 8000
+COPY . /code/
 
-CMD ["python","./application.py"]
-
+CMD python application.py
+EXPOSE 3000
