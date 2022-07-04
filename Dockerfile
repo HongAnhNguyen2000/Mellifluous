@@ -1,7 +1,7 @@
 
-FROM python
+FROM python:latest
 
-RUN pip install --upgrade pip
+RUN  pip install --upgrade pip
 
 RUN mkdir /code
 WORKDIR /code
