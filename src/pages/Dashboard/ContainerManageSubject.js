@@ -28,7 +28,7 @@ import DialogFormSubject from "../../components/DialogFormSubject";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#9d1010",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -42,6 +42,7 @@ const ContainerManageSubject = () => {
   const { subjects } = useSelector((state) => state.subject);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [open, setOpen] = useState(false);
+  const [subjectId, setSubjectId] = useState(null);
 
   const deleteSubject = (id) => {
     dispatch(deleteSub(id));
@@ -61,6 +62,11 @@ const ContainerManageSubject = () => {
     });
     
   };
+
+  const handleUpdateSubject = (id) => {
+    setOpen(true);
+    setSubjectId(id);
+  }
 
   useEffect(() => {
     dispatch(loadSubjects());
@@ -136,9 +142,11 @@ const ContainerManageSubject = () => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Button variant="contained" color="success" onClick={()=>setOpen(true)}>
+                              <Button variant="contained" color="success" onClick={() => {handleUpdateSubject(subject.id)}}>
                                 Edit
+                                
                               </Button>
+                             
                               <Button
                                 variant="outlined"
                                 color="error"
@@ -152,10 +160,12 @@ const ContainerManageSubject = () => {
                       </TableBody>
                     ))}
                 </Table>
+                
               </TableContainer>
+              <DialogFormSubject open={open} id= {subjectId} />
             </Stack>
            
-            <DialogFormSubject open={open} />
+            
             
           </Container>
         </Box>

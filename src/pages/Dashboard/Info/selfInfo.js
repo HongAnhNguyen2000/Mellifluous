@@ -46,6 +46,8 @@ const SelfInfo = ({ getRole }) => {
 
   //Info
   const { info } = useSelector((state) => state.info);
+  
+  
   useEffect(() => {
     dispatch(getStudent());
   }, []);
@@ -69,37 +71,37 @@ const SelfInfo = ({ getRole }) => {
           </CardContent>
 
           <CardContent>
-            {info && (
+            {info.length >0 && info.map((item) =>  (
               <Typography
                 variant="body1"
                 color="text.secondary"
                 align="justify"
               >
                 Họ và tên:{" "}
-                <b>{getRole === "0" ? info.namePerson : "Amy Nguyen"}</b>
+                <b>{getRole === "0" ? item.name : "Amy Nguyen"}</b>
                 <br />
                 {getRole === "0" ? (
                   <>
-                    Giới tính : <b>Nữ </b>
+                    Giới tính : <b>{item.gender}</b>
                     <br />
-                    Ngày sinh: <b>{info.birthday}</b>
+                    Mã Sinh Viên: <b>{item.maSV}</b>
                     <br />
-                    Năm vào trường: <b>2018</b>
+                    Năm vào trường: <b>{item.namvaotruong}</b>
                     <br />
-                    Lớp: <b>IT-LTU</b>
+                    Lớp: <b>{item.className}</b>
                     <br />
-                    Số điện thoại : <b>{info.phone}</b>
+                    Tình trạng học tập : <b>{item.isLearning}</b>
                     <br />
                     Bậc đào tạo : <b>SIE</b>
                     <br />
-                    Chương trình : <b>Công nghệ thông tin (LTU 15+)</b>
+                    Chương trình : <b>{item.nganh}</b>
                     <br />
-                    Khoa/Viện quản lý :{" "}
+                    Khoa/Viện quản lý :
                     <b>Viện Công nghệ thông tin và truyền thông</b>
                     <br />
-                    Email: <b>a.nt@sis.hust.edu.vn</b>
+                    Email: <b>{item.email}</b>
                     <br />
-                    Địa chỉ: <b>{info.address}</b>
+                    Khóa học: <b>{item.khoahoc}</b>
                     <br />
                   </>
                 ) : (
@@ -114,7 +116,7 @@ const SelfInfo = ({ getRole }) => {
                   </>
                 )}
               </Typography>
-            )}
+            ))}
             <br />
             <Button
               sx={{

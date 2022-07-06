@@ -54,19 +54,66 @@ const DialogFormSubject = ({ open }) => {
         <Form onSubmit={handleSubmit}>
           <DialogTitle>Thông tin môn học</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Cập nhật thông tin môn học 
-            </DialogContentText>
 
             <TextField
               margin="dense"
-              label="Ho va ten"
-              focused
-              name="namePerson"
+              label="Mã môn"
+              name="mamon"
              
               onChange={handleChange}
               fullWidth
-              variant="filled"
+              variant="outlined"
+              // error={Boolean(touched.namePerson && errors.namePerson)}
+              // helperText={touched.namePerson && errors.namePerson}
+            />
+            <TextField
+              margin="dense"
+              label="Tên môn"
+             
+              name="tenmon"
+             
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              // error={Boolean(touched.namePerson && errors.namePerson)}
+              // helperText={touched.namePerson && errors.namePerson}
+            />
+            <TextField
+              margin="dense"
+              label="Số tín chỉ"
+              type="number"
+              
+              name="sotinchi"
+             
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              // error={Boolean(touched.namePerson && errors.namePerson)}
+              // helperText={touched.namePerson && errors.namePerson}
+            />
+            <TextField
+              // margin="dense"
+              label="Thời gian học"
+              type="string"
+             
+              name="thoigianhoc"
+             
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
+              // error={Boolean(touched.namePerson && errors.namePerson)}
+              // helperText={touched.namePerson && errors.namePerson}
+            />
+            <TextField
+              margin="dense"
+              label="Giảng viên"
+              type="string"
+             
+              name="tengiangvien"
+             
+              onChange={handleChange}
+              fullWidth
+              variant="outlined"
               // error={Boolean(touched.namePerson && errors.namePerson)}
               // helperText={touched.namePerson && errors.namePerson}
             />

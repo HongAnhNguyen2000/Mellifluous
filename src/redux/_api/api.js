@@ -37,17 +37,17 @@ export const loadAccount = () => {
 export const getStudent = () => {
   return function (dispatch) {
     axios
-      .get("http://localhost:5001/info")
+      .get("http://localhost:8000/student/get_all")
       .then((resp) => {
         dispatch(action.getInfo(resp.data));
       })
       .catch((error) => console.log(error));
   };
 };
-export const updateStudent = (info) => {
+export const updateStudent = (info, id) => {
   return function (dispatch) {
     axios
-      .put("http://localhost:5001/info/", info)
+      .put(`http://localhost:8000/student/update_subject/${id}`, info)
       .then(() => {
         dispatch(action.updateInfo());
         dispatch(getStudent());
