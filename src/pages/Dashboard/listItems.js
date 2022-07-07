@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -7,80 +7,84 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 
-import { Avatar, ListItem, ListItemText, experimentalStyled as styled } from '@mui/material';
+import { Avatar, List, ListItemText, experimentalStyled as styled, ListItemButton } from '@mui/material';
 
  import { useHistory } from 'react-router';
 
- const styledListItem = styled(ListItem)(({theme}) => ({
-    root: {
-      "&$selected": {
-       color:  "#3954f5",
-       backgroundColor: "black"
-      },
-      "&:hover": {
-        color:  "grey",
-        
-      },
-      "&$selected:active": {
+ const StyledList = styled(List)(({theme}) => ({
+  '&& .Mui-selected, && .Mui-selected:hover': {
+    backgroundColor: '#375455',
 
-      }
-    }
+  },
+  // hover states
+  '& .MuiListItemButton-root:hover': {
+    backgroundColor: '#375455',
+    '&, & .MuiListItemIcon-root': {
+      color: 'yellow',
+    },
+  },
 
  }))
-const MainListItems = () =>{
+const MainListItems = ({selectedItem, setSelectedItem}) =>{
+
+  const handleListItemClick = (index) => {
+    setSelectedItem(index);
+  }
+
+
   let history = useHistory();
 
   const getRole = localStorage.getItem('accountInfo');
 
   return(
-  <div>
+  <StyledList>
     
-    <ListItem button onClick={()=> history.push("/dashboard")}> 
+    <ListItemButton onClick={()=> history.push("/dashboard")} selected={selectedItem === 0}> 
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black' }}>
         <PeopleIcon />
     </Avatar>
       <ListItemText primary="Thông tin cá nhân" />
-    </ListItem>
+    </ListItemButton>
     
-    <ListItem button  onClick={()=> history.push("/score")}>
+    <ListItemButton onClick={()=> history.push("/score")} selected={selectedItem === 1}>
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <BarChartIcon />
     </Avatar>
       <ListItemText primary="Kết quả học tập" />
-    </ListItem>
+    </ListItemButton>
 
     
 
     {getRole === '0' ? (
       <>
-    <ListItem button  onClick={()=> history.push("/subject")}>
+    <ListItemButton onClick={()=> history.push("/subject")} selected={selectedItem === 2}>
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black'  }}>
         <DashboardIcon />
     </Avatar>
       <ListItemText primary="Đăng kí tín chỉ" />
-    </ListItem>
+    </ListItemButton>
     
-    <ListItem button  onClick={()=> history.push("/extra")}>
+    <ListItemButton  onClick={()=> history.push("/extra")} selected={selectedItem === 3}>
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <LayersIcon />
     </Avatar>
       <ListItemText primary="Điểm rèn luyện" />
-    </ListItem>
+    </ListItemButton>
 
 
     </>    
     ):
     (
       <>
-      <ListItem button  onClick={()=> history.push("/manageSubject")}>
+      <ListItemButton  onClick={()=> history.push("/manageSubject")} selected= {selectedItem === 4}>
       <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
           <LayersIcon />
       </Avatar>
         <ListItemText primary="Quản lý môn học" />
-      </ListItem>
+      </ListItemButton>
     </>
     )}
-  </div>
+  </StyledList>
 );
 
 }

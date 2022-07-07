@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React, {useState} from "react";
 import {
   styled,
   createTheme,
@@ -6,12 +6,14 @@ import {
   List,
   Typography,
   Divider,
-
+  Stack,
   Avatar,
+  Button
 
 } from "@mui/material";
 
 import MuiDrawer from "@mui/material/Drawer";
+import LogoutIcon from "@mui/icons-material/Logout";
 import MainListItems from "./listItems";
 
 import { useHistory } from "react-router-dom";
@@ -26,8 +28,8 @@ const Drawer = styled(MuiDrawer, {
   "& .MuiDrawer-paper": {
     position: "relative",
     whiteSpace: "nowrap",
-    backgroundColor: "white",
-    color: "black",
+    backgroundColor: "#5cbebf",
+    color: "white",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
@@ -41,6 +43,8 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   let history = useHistory();
+
+  const [selectedItem, setSelectedItem] = useState(0);
 
 
   const getRole = localStorage.getItem('accountInfo');
@@ -59,24 +63,29 @@ function DashboardContent() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: "white",
+            color: "#2a4a4b",
             px: [1],
           }}
         >
            {getRole === '0' ? 
-           <>
+           <Stack direction="row" spacing={2} alignItems="center" justifyContent="center">
             <Avatar src="/static/avatars/avatar_24.jpg" alt="photoURL" />
-            <Typography>Welcome, Ngọc Minh </Typography>
-          </>
+            <Typography>20187210 </Typography>
+            <Button variant="contained" onClick={onLogOut} sx={{color: "75bcbe"}}>
+              <LogoutIcon/>
+            </Button>
+          </Stack>
             :
-            <>
+            <Stack direction="row" spacing={2}  alignItems="center" justifyContent="center">
             <Avatar src="/static/avatars/avatar_22.jpg" alt="photoURL" />
             <Typography>Welcome, Amie Nguyễn </Typography>
-            </>
+            </Stack>
             }
         </Toolbar>
         <Divider />
         <List>
-          <MainListItems />
+          <MainListItems selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
         </List>
       </Drawer>
     </>

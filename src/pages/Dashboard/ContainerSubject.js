@@ -39,7 +39,7 @@ const ContainerSubject = () => {
             overflow: "auto",
           }}
         >
-          <Toolbar />
+          
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container>
               <Grid item xs={8} paddingRight={4}>
@@ -48,7 +48,7 @@ const ContainerSubject = () => {
               <Grid item xs={4}>
                 <Stack direction="column" spacing={4}>
                   <InfoTeach />
-                  <FinalSub />
+                  {/* <FinalSub /> */}
                 </Stack>
               </Grid>
             </Grid>

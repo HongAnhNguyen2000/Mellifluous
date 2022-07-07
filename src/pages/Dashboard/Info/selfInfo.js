@@ -58,14 +58,14 @@ const SelfInfo = ({ getRole }) => {
         <Grid item xs={12} md={12} lg={4}>
           <CardMedia
             component="img"
-            height="140"
+           
             image="/static/avatars/avatar_24.jpg"
             alt="green iguana"
           ></CardMedia>
         </Grid>
         <Grid item xs={12} md={12} lg={8}>
-          <CardContent>
-            <Typography variant="h5" component="div">
+          <CardContent sx={{textAlign:"center"}}>
+            <Typography variant="h4" component="div" sx={{color: "rgb(117 188 190)"}}>
               THÔNG TIN CÁ NHÂN
             </Typography>
           </CardContent>
@@ -73,7 +73,7 @@ const SelfInfo = ({ getRole }) => {
           <CardContent>
             {info.length >0 && info.map((item) =>  (
               <Typography
-                variant="body1"
+                variant="h6"
                 color="text.secondary"
                 align="justify"
               >
@@ -120,7 +120,7 @@ const SelfInfo = ({ getRole }) => {
             <br />
             <Button
               sx={{
-                backgroundColor: "#9e1010",
+                backgroundColor: "#75bcbe",
                 color: "white",
                 "&:hover": {
                   backgroundColor: "black",

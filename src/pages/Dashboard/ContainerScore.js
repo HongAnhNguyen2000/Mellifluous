@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/private-theming'
 import React,{useEffect} from 'react'
 
-import {Box, Container, Toolbar, CssBaseline} from '@mui/material'
+import {Box, Container, CssBaseline} from '@mui/material'
 
 
 import DashboardContent from './Dashboard'
@@ -29,7 +29,7 @@ const ContainerScore = () => {
           overflow: 'auto',
         }}
       >
-        <Toolbar />
+        
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           { getRole === '0' ? 
             <EnhancedTable/>
