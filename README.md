@@ -12,10 +12,13 @@ BACK_END : FASTAPI
 
 DATABASE: MONGODB
 
-AVAILABLE SCRIPTS To start project, from the frontend directiory, you can run
+AVAILABLE SCRIPTS 
+---------------------
+To start project, from the frontend directiory, you can run
 
 NPM START
 NPM RUN SERVER
+---------------------
 To start from the backend directory, you can run
 
 PYTHON3 APPLICATION.PY
