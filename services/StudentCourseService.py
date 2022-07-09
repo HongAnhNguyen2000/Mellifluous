@@ -15,13 +15,17 @@ class StudentCourseService:
         # except:
         #     return 'Create subject Failed'
     
-    def create_course(self, id_subj: str, id_student:str):
+    def create_course(self, mamon: str, masoSV:str, semester: str):
         # try:
-            res = self.repo.create_course(id_subj, id_student)
+            res = self.repo.create_course(mamon, masoSV, semester)
             print('Success')
 
             return res
         
     def get_course(self):
         res = self.repo.get_course()
+        return res
+    
+    def delete_student_course(self, id):
+        res = self.repo.delete_student_course(id)
         return res

@@ -24,15 +24,16 @@ class StudentCourseRepo(BaseRepo):
             return JSONResponse(status_code=status.HTTP_201_CREATED, content=created_stuC)
 
 
-    def create_course(self, id_subj:str, id_student: str):
-        course = self.subcollection.find_one({"_id": id_subj})
+    def create_course(self, mamon:str, maso_SinhVien: str, semester: str):
+        course = self.subcollection.find_one({"mamon": mamon})
         # print(course['name'])
-        if self.collection.find_one({"course.mamon": course['mamon']}) != None:
-            raise HTTPException(status_code=406, detail=f"Sinh viên đã đăng ký môn {course['name']} trong kỳ này ")
+        # print(self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester)}))
+        if self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester)}) != None:
+            raise HTTPException(status_code=406, detail=f"Sinh viên đã đăng ký môn {course['name']} trong kỳ {semester} này ")
         else:
         # new_course = SubjectUtils.format_subject(course)
             st_course = self.collection.update(
-                            { "student._id" : id_student},
+                            { "student.maSV" : maso_SinhVien, "semester": int(semester)},
                             { "$addToSet": {"course": course}}
                         )
             print(st_course)
@@ -44,6 +45,13 @@ class StudentCourseRepo(BaseRepo):
         # print(list1)
         return list1
     
-    # def delete_course(self)
+    def delete_student_course(self, id: str):
+        delete_result = self.collection.delete_one({"_id": id})
+
+        if delete_result.deleted_count == 1:
+            return JSONResponse(status_code=status.HTTP_204_NO_CONTENT)
+
+        raise HTTPException(status_code=404, detail=f"Student_Course id {id} not found")
+
         
 

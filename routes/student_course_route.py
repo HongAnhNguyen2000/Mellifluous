@@ -10,12 +10,19 @@ def create_studentCourse(studentCourse: Student_Course):
     res = StudentCourseService().create_student_course(studentCourse)
     return res
 
-@router.put('/update/{id_student}&{id_subj}')
-def create_course(id_subj:str, id_student:str):
-    res = StudentCourseService().create_course(id_subj,id_student)
+@router.put('/update/{masoSV}&{mamon}/{semester}')
+def create_course(mamon:str, masoSV:str, semester: str):
+    res = StudentCourseService().create_course(mamon,masoSV,semester)
     return res
 
 @router.get('/get_all')
 def get_all():
     res = StudentCourseService().get_course()
     return res
+
+@router.delete('/delete/{id}')
+def delete_student_course(id: str):
+    res = StudentCourseService().delete_student_course(id)
+    return res
+
+

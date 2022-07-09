@@ -16,12 +16,12 @@ def get_all_student():
     return res
 
 
-@router.put('/update_subject/{id}', response_model=Student)
+@router.put('/update_student/{id}', response_model=Student)
 def update_student(id: str, student: UpdatedStudent = Body(...)):
     res = StudentService().update_student(id, student)
     return res
 
-@router.delete('/delete_subject/{id}')
+@router.delete('/delete_student/{id}')
 def delete_student(id: str):
     res = StudentService().delete_student(id)
     return res
