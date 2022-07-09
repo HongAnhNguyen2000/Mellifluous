@@ -13,3 +13,4 @@ export const GetRegis = (regis) => ({
     type: 'GET_REGIS',
     payload: regis,
   });
+

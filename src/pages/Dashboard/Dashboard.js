@@ -79,7 +79,7 @@ function DashboardContent() {
             :
             <Stack direction="row" spacing={2}  alignItems="center" justifyContent="center">
             <Avatar src="/static/avatars/avatar_22.jpg" alt="photoURL" />
-            <Typography>Welcome, Amie Nguyễn </Typography>
+            <Typography>Welcome, Amie </Typography>
             </Stack>
             }
         </Toolbar>

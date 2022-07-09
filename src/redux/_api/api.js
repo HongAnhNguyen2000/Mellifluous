@@ -1,26 +1,6 @@
 import axios from "axios";
 import * as action from "../actions";
-//Account
 
-// Add a request interceptor
-// axios.interceptors.request.use(function (config) {
-//   console.log(config)
-//   // Do something before request is sent
-//   return config;
-// }, function (error) {
-//   // Do something with request error
-//   return Promise.reject(error);
-// });
-
-// // Add a response interceptor
-// axios.interceptors.response.use(function (response) {
-//   console.log(response)
-//   return response;
-// }, function (error) {
-//   // Any status codes that falls outside the range of 2xx cause this function to trigger
-//   // Do something with response error
-//   return Promise.reject(error);
-// });
 
 export const loadAccount = () => {
   return function (dispatch) {
@@ -74,7 +54,7 @@ export const loadSubjects = () => {
       .get("http://localhost:8000/subject/get_all")
       .then((resp) => {
         dispatch(action.subGet(resp.data));
-        console.log(resp.data)
+       
       })
       .catch((error) => console.log(error));
   };
@@ -82,9 +62,10 @@ export const loadSubjects = () => {
 export const getSub = (id) => {
   return function (dispatch) {
     axios
-      .get(`http://localhost:5001/subject/${id}`)
+      .get(`http://localhost:8000/subject/get_by_id/${id}`)
       .then((resp) => {
         dispatch(action.getEachSub(resp.data));
+       
       })
       .catch((error) => console.log(error));
   };
@@ -94,11 +75,32 @@ export const deleteSub = (id) => {
   return function (dispatch) {
     axios.delete(`http://localhost:8000/subject/delete_subject/${id}`)
     .then(() => {
-      dispatch(action.deleRegis(id));
+      dispatch(action.subDelete(id));
     })
     .catch((error) =>console.log(error) )
   }
 }
+
+export const updateSub = (info, id) => {
+  return function (dispatch) {
+    axios.put(`http://localhost:8000/subject/update_subject/${id}`, info)
+    .then(() => {
+      dispatch(action.subUpdate())
+    })
+    .catch((error) => console.log(error))
+  }
+}
+
+export const addNewSub = (sub) => {
+  return function (dispatch) {
+    axios.post('http://localhost:8000/subject/create', sub)
+    .then(() => {
+      dispatch(action.subAdd())
+    })
+    .catch((error) => console.log(error))
+  }
+}
+
 
 //regis
 export const regisAdd = (regis) => {

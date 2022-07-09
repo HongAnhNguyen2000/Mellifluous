@@ -22,14 +22,16 @@ import { useSnackbar } from "notistack";
 
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSubjects, deleteSub } from "../../redux/_api/api";
+import { loadSubjects, deleteSub, getSub } from "../../redux/_api/api";
 import DashboardContent from "./Dashboard";
 import DialogFormSubject from "../../components/DialogFormSubject";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#9d1010",
+    backgroundColor: "#2a4d5d",
     color: theme.palette.common.white,
+    fontSize:16,
+    fontWeight: 700
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
@@ -40,13 +42,18 @@ const ContainerManageSubject = () => {
   let dispatch = useDispatch();
 
   const { subjects } = useSelector((state) => state.subject);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const {subject} = useSelector((state) => state.subject);
+
+  const [addMode, setAddMode] = useState(false);
   const [open, setOpen] = useState(false);
-  const [subjectId, setSubjectId] = useState(null);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+ 
+ 
 
   const deleteSubject = (id) => {
     dispatch(deleteSub(id));
-    dispatch(loadSubjects())
+    dispatch(loadSubjects());
     enqueueSnackbar("DELETE SUCCESS", {
       variant: "success",
       action: (key) => (
@@ -65,7 +72,13 @@ const ContainerManageSubject = () => {
 
   const handleUpdateSubject = (id) => {
     setOpen(true);
-    setSubjectId(id);
+    dispatch(getSub(id))
+    setAddMode(false)
+  }
+
+  const handleAddNewSubject = () => {
+    setOpen(true);
+   setAddMode(true);
   }
 
   useEffect(() => {
@@ -73,7 +86,7 @@ const ContainerManageSubject = () => {
   }, []);
 
   return (
-    <ThemeProvider>
+    <ThemeProvider >
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <DashboardContent />
@@ -89,11 +102,12 @@ const ContainerManageSubject = () => {
         
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Stack direction="column" spacing={2}>
-              <Button variant="contained" color="primary" sx={{ width: "200px" }}>
+              <Typography variant="h3" sx={{textAlign:"center", color: "#2a4d5d"}}>Quản lý môn học</Typography>
+              <Button variant="contained" color="primary" sx={{ width: "200px", backgroundColor: '#f4b367', color: "black" }} onClick={() => {handleAddNewSubject()}}>
                 
                 +ADD SUBJECT
               </Button>
-              <TableContainer sx={{ paddingLeft: "10px" }}>
+              <TableContainer sx={{ paddingLeft: "0px" }}>, 
                 <Table
                   stickyHeader
                   aria-label="sticky table"
@@ -124,6 +138,7 @@ const ContainerManageSubject = () => {
                     subjects.map((subject) => (
                       <TableBody sx={{ maxHeight: "300px" }} key={subject.id}>
                         <TableRow>
+                         
                           <TableCell component="th" scope="row" align="center">
                             {subject.mamon}
                           </TableCell>
@@ -142,13 +157,13 @@ const ContainerManageSubject = () => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Button variant="contained" color="success" onClick={() => {handleUpdateSubject(subject.id)}}>
+                              <Button variant="outlined" color="success" onClick={() => {handleUpdateSubject(subject.id)}}>
                                 Edit
                                 
                               </Button>
                              
                               <Button
-                                variant="outlined"
+                                variant="contained"
                                 color="error"
                                 onClick={() => deleteSubject(subject.id)}
                               >
@@ -156,13 +171,14 @@ const ContainerManageSubject = () => {
                               </Button>
                             </Stack>
                           </TableCell>
+                         
                         </TableRow>
                       </TableBody>
                     ))}
                 </Table>
                 
               </TableContainer>
-              <DialogFormSubject open={open} id= {subjectId} />
+              <DialogFormSubject open={open}  setOpen={setOpen} subject={addMode ? {} : subject} />
             </Stack>
            
             
