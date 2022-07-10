@@ -1,6 +1,3 @@
-from models.Student_Score import Student_Score
-from utils.SubjectUtils import SubjectUtils
-from utils.StudentUtils import StudentUtils
 
 class StudentScoreUtils:
     def format_student_score(self, studentscore):

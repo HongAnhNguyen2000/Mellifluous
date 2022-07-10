@@ -28,7 +28,7 @@ class StudentCourseRepo(BaseRepo):
         course = self.subcollection.find_one({"mamon": mamon})
         # print(course['name'])
         # print(self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester)}))
-        if self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester)}) != None:
+        if self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester), 'student.maSV': maso_SinhVien}) != None:
             raise HTTPException(status_code=406, detail=f"Sinh viên đã đăng ký môn {course['name']} trong kỳ {semester} này ")
         else:
         # new_course = SubjectUtils.format_subject(course)
