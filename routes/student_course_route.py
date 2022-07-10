@@ -20,9 +20,9 @@ def get_all():
     res = StudentCourseService().get_course()
     return res
 
-@router.delete('/delete/{id}')
-def delete_student_course(id: str):
-    res = StudentCourseService().delete_student_course(id)
+@router.delete('/delete/{masoSV}&{mamon}/{semester}')
+def delete_student_course(mamon:str, masoSV:str, semester: str):
+    res = StudentCourseService().delete_student_course(mamon,masoSV,semester)
     return res
 
 

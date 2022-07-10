@@ -45,13 +45,17 @@ class StudentCourseRepo(BaseRepo):
         # print(list1)
         return list1
     
-    def delete_student_course(self, id: str):
-        delete_result = self.collection.delete_one({"_id": id})
-
-        if delete_result.deleted_count == 1:
-            return JSONResponse(status_code=status.HTTP_204_NO_CONTENT)
-
-        raise HTTPException(status_code=404, detail=f"Student_Course id {id} not found")
+    def delete_student_course_by_id(self, mamon: str, maso_SinhVien, semester: str):
+        course = self.subcollection.find_one({"mamon": mamon})
+        if self.collection.find_one({"course.mamon": course['mamon'], "semester": int(semester), 'student.maSV': maso_SinhVien}) is None:
+            raise HTTPException(status_code=406, detail=f"Sinh viên không đăng ký môn {course['name']} trong kỳ {semester} này ")
+        else:
+        # new_course = SubjectUtils.format_subject(course)
+            st_course = self.collection.update(
+                            { "student.maSV" : maso_SinhVien, "semester": int(semester)},
+                            { "$pull": {"course": course}}
+                        )
+            return 'Success delete'
 
         
 

@@ -26,6 +26,6 @@ class StudentCourseService:
         res = self.repo.get_course()
         return res
     
-    def delete_student_course(self, id):
-        res = self.repo.delete_student_course(id)
+    def delete_student_course(self, mamon: str, masoSV:str, semester: str):
+        res = self.repo.delete_student_course_by_id(mamon, masoSV, semester)
         return res
