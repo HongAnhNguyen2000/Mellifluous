@@ -25,6 +25,11 @@ def getscore_by_id(maSV: str):
     res = StudentScoreService().get_student_score_by_id(maSV)
     return res
 
+@router.get('/get_rank_GPA_student/{semester}')
+def get_rank_semester(semester: str):
+    res = StudentScoreService().get_rank_GPA_student(semester)
+    return res
+    
 @router.post('/create_student_GPA/{masoSV}&{semester}')
 def create_student_GPA(masoSV: str, semester: str):
     res = StudentScoreService().create_student_GPA(masoSV, semester)
@@ -39,4 +44,5 @@ def getGPA_by_id(maSV: str):
 def getCPA_by_id(maSV:str, semester: str):
     res = StudentScoreService().cal_student_GPA(maSV, semester)
     return res
+
 

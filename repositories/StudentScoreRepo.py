@@ -104,4 +104,3 @@ class StudentScoreRepo(BaseRepo):
         list1 = [StudentScoreUtils().format_student_score(response) for response in res]
         
         return list1
-

@@ -35,6 +35,10 @@ class StudentScoreService:
         res = self.repoGPA.get_GPA_by_idSV(masoSV)
         return res
     
+    def get_rank_GPA_student(self, semester: str):
+        res = self.repoGPA.get_student_GPA_rank(semester)
+        return res
+    
     #tính CPA
     def cal_student_GPA(self, masoSV: str, semester: str):
         res = self.repoGPA.cal_student_CPA(masoSV, semester)

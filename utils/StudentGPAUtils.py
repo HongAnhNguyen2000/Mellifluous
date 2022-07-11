@@ -6,3 +6,11 @@ class StudentGPAUtils:
             'GPA': str(studentGPA['GPA']),
             'semester': str(studentGPA['semester'])
         }
+    
+    def format_GPA_student(self, studentGPA, student):
+        return {
+            'masoSV': studentGPA['masoSV'],
+            "name": student['name'],
+            'GPA': str(studentGPA['GPA']),
+            'semester': str(studentGPA['semester'])
+        }
