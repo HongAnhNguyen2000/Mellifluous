@@ -41,10 +41,9 @@ const Drawer = styled(MuiDrawer, {
 }));
 const mdTheme = createTheme();
 
-function DashboardContent() {
+function DashboardContent({selectedItem}) {
   let history = useHistory();
 
-  const [selectedItem, setSelectedItem] = useState(0);
 
 
   const getRole = localStorage.getItem('accountInfo');
@@ -79,13 +78,16 @@ function DashboardContent() {
             :
             <Stack direction="row" spacing={2}  alignItems="center" justifyContent="center">
             <Avatar src="/static/avatars/avatar_22.jpg" alt="photoURL" />
-            <Typography>Welcome, Amie </Typography>
+            <Typography> 12 </Typography>
+            <Button variant="contained" onClick={onLogOut} sx={{color: "75bcbe"}}>
+              <LogoutIcon/>
+            </Button>
             </Stack>
             }
         </Toolbar>
         <Divider />
         <List>
-          <MainListItems selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+          <MainListItems selectedItem={selectedItem}  />
         </List>
       </Drawer>
     </>
@@ -93,6 +95,6 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
+export default function Dashboard({selectedItem}) {
+  return <DashboardContent selectedItem={selectedItem} />;
 }

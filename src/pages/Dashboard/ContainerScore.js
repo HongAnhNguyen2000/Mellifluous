@@ -16,7 +16,7 @@ const ContainerScore = () => {
         <ThemeProvider>
          <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-        <DashboardContent/>
+        <DashboardContent selectedItem= '1'/>
         <Box
         component="main"
         sx={{

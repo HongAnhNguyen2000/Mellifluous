@@ -21,7 +21,7 @@ const ContainerInfo = () => {
         <ThemeProvider>
             <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <DashboardContent/>
+            <DashboardContent selectedItem ='0'/>
         <Box
         component="main"
         sx={{

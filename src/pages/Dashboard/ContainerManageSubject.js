@@ -89,7 +89,7 @@ const ContainerManageSubject = () => {
     <ThemeProvider >
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <DashboardContent />
+        <DashboardContent selectedItem='4' />
         <Box
           component="main"
           sx={{

@@ -37,7 +37,7 @@ const ContainerSubject = () => {
     <ThemeProvider>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <CssBaseline />
-        <DashboardContent />
+        <DashboardContent selectedItem='2' />
         <Box
           component="main"
           sx={{

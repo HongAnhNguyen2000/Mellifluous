@@ -46,6 +46,8 @@ const SelfInfo = ({ getRole }) => {
 
   //Info
   const { info } = useSelector((state) => state.info);
+  const studentInfo = info.length> 0 ? info.find((x) => x.maSV = '20187210') : {};
+
   
   
   useEffect(() => {
@@ -55,7 +57,7 @@ const SelfInfo = ({ getRole }) => {
   return (
     <Card sx={{ minWidth: 275 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={12} lg={4}>
+        <Grid studentInfo xs={12} md={12} lg={4}>
           <CardMedia
             component="img"
            
@@ -63,7 +65,7 @@ const SelfInfo = ({ getRole }) => {
             alt="green iguana"
           ></CardMedia>
         </Grid>
-        <Grid item xs={12} md={12} lg={8}>
+        <Grid studentInfo xs={12} md={12} lg={8}>
           <CardContent sx={{textAlign:"center"}}>
             <Typography variant="h4" component="div" sx={{color: "rgb(117 188 190)"}}>
               THÔNG TIN CÁ NHÂN
@@ -71,38 +73,38 @@ const SelfInfo = ({ getRole }) => {
           </CardContent>
 
           <CardContent>
-            {info.length >0 && info.map((item) =>  (
+           
               <Typography
                 variant="h6"
                 color="text.secondary"
                 align="justify"
-                key= {item.maSV}
+                key= {studentInfo.maSV}
               >
                 Họ và tên:{" "}
-                <b>{getRole === "0" ? item.name : "Amy Nguyen"}</b>
+                <b>{getRole === "0" ? studentInfo.name : "Amy Nguyen"}</b>
                 <br />
                 {getRole === "0" ? (
                   <>
-                    Giới tính : <b>{item.gender}</b>
+                    Giới tính : <b>{studentInfo.gender}</b>
                     <br />
-                    Mã Sinh Viên: <b>{item.maSV}</b>
+                    Mã Sinh Viên: <b>{studentInfo.maSV}</b>
                     <br />
-                    Năm vào trường: <b>{item.namvaotruong}</b>
+                    Năm vào trường: <b>{studentInfo.namvaotruong}</b>
                     <br />
-                    Lớp: <b>{item.className}</b>
+                    Lớp: <b>{studentInfo.className}</b>
                     <br />
-                    Tình trạng học tập : <b>{item.isLearning}</b>
+                    Tình trạng học tập : <b>{studentInfo.isLearning}</b>
                     <br />
                     Bậc đào tạo : <b>SIE</b>
                     <br />
-                    Chương trình : <b>{item.nganh}</b>
+                    Chương trình : <b>{studentInfo.nganh}</b>
                     <br />
                     Khoa/Viện quản lý :
                     <b>Viện Công nghệ thông tin và truyền thông</b>
                     <br />
-                    Email: <b>{item.email}</b>
+                    Email: <b>{studentInfo.email}</b>
                     <br />
-                    Khóa học: <b>{item.khoahoc}</b>
+                    Khóa học: <b>{studentInfo.khoahoc}</b>
                     <br />
                   </>
                 ) : (
@@ -117,7 +119,7 @@ const SelfInfo = ({ getRole }) => {
                   </>
                 )}
               </Typography>
-            ))}
+          
             <br />
             <Button
               sx={{
@@ -135,7 +137,7 @@ const SelfInfo = ({ getRole }) => {
             <DialogForm
               open={open}
               handleClose={handleClose}
-              info={info}
+              info={studentInfo}
               setSnackbar={setSnackbar}
             />
             <Snackbar

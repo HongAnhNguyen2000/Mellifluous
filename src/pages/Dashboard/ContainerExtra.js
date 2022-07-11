@@ -84,7 +84,7 @@ const ContainerExtra = () => {
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <DashboardContent />
+        <DashboardContent selectedItem = '3'/>
         <Box
           component="main"
           sx={{

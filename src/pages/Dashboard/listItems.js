@@ -25,11 +25,7 @@ import { Avatar, List, ListItemText, experimentalStyled as styled, ListItemButto
   },
 
  }))
-const MainListItems = ({selectedItem, setSelectedItem}) =>{
-
-  const handleListItemClick = (index) => {
-    setSelectedItem(index);
-  }
+const MainListItems = ({selectedItem}) =>{
 
 
   let history = useHistory();
@@ -39,14 +35,14 @@ const MainListItems = ({selectedItem, setSelectedItem}) =>{
   return(
   <StyledList>
     
-    <ListItemButton onClick={()=> history.push("/dashboard")} selected={selectedItem === 0}> 
+    <ListItemButton onClick={()=> history.push("/dashboard")} selected={selectedItem === '0'}> 
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black' }}>
         <PeopleIcon />
     </Avatar>
       <ListItemText primary="Thông tin cá nhân" />
     </ListItemButton>
     
-    <ListItemButton onClick={()=> history.push("/score")} selected={selectedItem === 1}>
+    <ListItemButton onClick={()=> history.push("/score")} selected={selectedItem === '1'}>
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <BarChartIcon />
     </Avatar>
@@ -57,18 +53,18 @@ const MainListItems = ({selectedItem, setSelectedItem}) =>{
 
     {getRole === '0' ? (
       <>
-    <ListItemButton onClick={()=> history.push("/subject")} selected={selectedItem === 2}>
+    <ListItemButton onClick={()=> history.push("/subject")} selected={selectedItem === '2'}>
     <Avatar sx={{ m: 1, bgcolor: 'white',color:'black'  }}>
         <DashboardIcon />
     </Avatar>
       <ListItemText primary="Đăng kí tín chỉ" />
     </ListItemButton>
     
-    <ListItemButton  onClick={()=> history.push("/extra")} selected={selectedItem === 3}>
+    <ListItemButton  onClick={()=> history.push("/extra")} selected={selectedItem === '3'}>
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <LayersIcon />
     </Avatar>
-      <ListItemText primary="Điểm rèn luyện" />
+      <ListItemText primary="Bảng xếp hạng" />
     </ListItemButton>
 
 
@@ -76,7 +72,7 @@ const MainListItems = ({selectedItem, setSelectedItem}) =>{
     ):
     (
       <>
-      <ListItemButton  onClick={()=> history.push("/manageSubject")} selected= {selectedItem === 4}>
+      <ListItemButton  onClick={()=> history.push("/manageSubject")} selected= {selectedItem === '4'}>
       <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
           <LayersIcon />
       </Avatar>

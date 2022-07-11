@@ -27,7 +27,7 @@ export const getStudent = () => {
 export const updateStudent = (info, id) => {
   return function (dispatch) {
     axios
-      .put(`http://localhost:8000/student/update_subject/${id}`, info)
+      .put(`http://localhost:8000/student/update_student/${id}`, info)
       .then(() => {
         dispatch(action.updateInfo());
         dispatch(getStudent());

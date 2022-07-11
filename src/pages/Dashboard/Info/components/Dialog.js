@@ -29,20 +29,20 @@ const DialogForm = ({ open, handleClose, info, setSnackbar }) => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      namePerson: info.length >0 && info[0].name,
+      namePerson: info && info.name,
 
-      gender: info.length >0 && info[0].gender,
-      email: info.length >0 && info[0].email,
+      gender: info && info.gender,
+      email: info && info.email,
     },
     validationSchema: InfoSchema,
     onSubmit: (values) => {
-      const infoStudent = info.length >0 && info[0]
+      
       dispatch(updateStudent({
-        ...infoStudent,
+        ...info,
         email : values.email,
         name: values.namePerson,
         gender: values.gender
-      }, infoStudent.id));
+      }, info.id));
       handleClose();
       setSnackbar({ opening: true, vertical: "top", horizontal: "right" });
     },

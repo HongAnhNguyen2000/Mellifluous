@@ -23,21 +23,24 @@ const DialogSubmitScore = ({open, onClose, id}) => {
   const { enqueueSnackbar } = useSnackbar();
 
   const { subjectbyID } = useSelector((state) => state.teacherSubject);
+  console.log(subjectbyID);
 
 
   const studentsInSubject =  subjectbyID ? subjectbyID.students: [];
-
-  const [studentScore, setStudentScore] = useState(studentsInSubject)
   
-  console.log(studentScore)
+
+  const [studentScore, setStudentScore] = useState(studentsInSubject ? studentsInSubject : [])
+  console.log(studentScore);
+  
+  
 
 
   const onChangeMidScoreItem = ({id, value}) => {
-    setStudentScore(prev => prev.map(item => item.id === id ? {...item, midscore: value} : item))
+    setStudentScore(prev => prev.map(item => item.id === id ? {...item, midscore: parseInt(value,10)} : item))
   }
   
   const onChangeEndScoreItem = ({id, value}) => {
-    setStudentScore(prev => prev.map(item => item.id === id ? {...item, endscore: value} : item))
+    setStudentScore(prev => prev.map(item => item.id === id ? {...item, endscore: parseInt(value,10)} : item))
   }
   
 
