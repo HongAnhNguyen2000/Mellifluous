@@ -103,10 +103,10 @@ export const addNewSub = (sub) => {
 
 
 //regis
-export const regisAdd = (regis) => {
+export const regisAdd = (studentId, subjectId) => {
   return function (dispatch) {
     axios
-      .post("http://localhost:5001/regis", regis)
+      .put(`http://localhost:8000/student_course/update/${studentId}&${subjectId}/20211`)
       .then((resp) => {
         dispatch(action.AddRegis(resp.data));
         dispatch(loadRegis());
@@ -114,10 +114,10 @@ export const regisAdd = (regis) => {
       .catch((error) => console.log(error));
   };
 };
-export const regisDelete = (id) => {
+export const regisDelete = (studentId, subjectId) => {
   return function (dispatch) {
     axios
-      .delete(`http://localhost:5001/regis/${id}`)
+      .delete(`http://localhost:8000/student_course/delete/${studentId}&${subjectId}/20211`)
       .then((resp) => {
         dispatch(action.deleRegis(resp.data));
         dispatch(loadRegis());
@@ -128,7 +128,7 @@ export const regisDelete = (id) => {
 export const loadRegis = () => {
   return function (dispatch) {
     axios
-      .get("http://localhost:5001/regis")
+      .get("http://localhost:8000/student_course/get_all")
       .then((resp) => {
         dispatch(action.GetRegis(resp.data));
       })

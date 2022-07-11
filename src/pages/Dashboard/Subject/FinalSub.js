@@ -16,6 +16,7 @@ import {
   Slide,
   Alert
 } from "@mui/material";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loadRegis, regisDelete } from "../../../redux/_api/api";
 import { styled } from "@mui/styles";
@@ -24,7 +25,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 //Data
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "black",
+    backgroundColor: "#75bcbe",
     color: "whitesmoke",
   },
   [`&.${tableCellClasses.body}`]: {
@@ -37,16 +38,23 @@ function TransitionLeft(props){
 }
 
 const FinalSub = () => {
+  let history = useHistory();
   let dispatch = useDispatch();
   const { regis } = useSelector((state) => state.regis);
+
  
   useEffect(() => {
     dispatch(loadRegis());
   }, []);
 
-  const Getcredits = regis.map((regi) => (regi.credits));
+  
+
+  const getRegisForStudent = regis.find((item) => item.student.maSV === '20187210');
+ 
+
+  const Getcredits = getRegisForStudent ? getRegisForStudent.course.map((regi) => (regi.sotinchi)) : [];
   const totalCredits = Getcredits.reduce(
-    (previousCredit, currentCredit, index)=>previousCredit+currentCredit, 
+    (previousCredit, currentCredit, index)=>parseInt(previousCredit, 10)+parseInt(currentCredit, 10), 
     0);
   
 
@@ -59,11 +67,11 @@ const FinalSub = () => {
   const onHandleClick = (Transition) => (e) => {
     setTransition(() => Transition);
     setOpen(true);
-    if(totalCredits >=16){
-      const takeOnlyId = GetId.map((Id)=>
-      dispatch(regisDelete(Id))
-    )
-    window.location.reload()
+    if(totalCredits >=16) {
+ 
+        history.push("/regisSuccess");
+      
+      
     }
     
   
@@ -76,7 +84,7 @@ const FinalSub = () => {
 
   const onChangeDelete = (id) => {
     if (window.confirm("Are you confirm to delete the user ?")) {
-      dispatch(regisDelete(id));
+      dispatch(regisDelete('20187210', id));
       dispatch(loadRegis());
     }
   };
@@ -93,7 +101,7 @@ const FinalSub = () => {
         >
           <CardHeader
             title="SCHEDULE REGISTER"
-            sx={{ color: "white", bgcolor: "#9e1010" }}
+            sx={{ color: "white", bgcolor: "#24686e" }}
           ></CardHeader>
           <CardContent>
             <Table>
@@ -105,11 +113,11 @@ const FinalSub = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {regis &&
-                  regis.map((regi) => (
+                {getRegisForStudent &&
+                  getRegisForStudent.course.map((regi) => (
                     <TableRow key={regi.id}>
-                      <TableCell align="center">{regi.occupation}</TableCell>
-                      <TableCell align="center">{regi.credits}</TableCell>
+                      <TableCell align="center">{regi.mamon}</TableCell>
+                      <TableCell align="center">{regi.sotinchi}</TableCell>
                       <TableCell align="center">
                         <Button onClick={() => onChangeDelete(regi.id)}>
                           <DeleteIcon />
@@ -127,7 +135,7 @@ const FinalSub = () => {
             </Table>
          
             <br/>
-            <Button size="small" variant="contained" color="error"  onClick={onHandleClick(TransitionLeft)}>Regis to schedule</Button>
+            <Button size="small" variant="contained"   onClick={onHandleClick(TransitionLeft)}>Regis to schedule</Button>
             <Snackbar
              anchorOrigin={{vertical:' bottom', horizontal:'right' }}
             open={open}

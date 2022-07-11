@@ -76,6 +76,7 @@ const SelfInfo = ({ getRole }) => {
                 variant="h6"
                 color="text.secondary"
                 align="justify"
+                key= {item.maSV}
               >
                 Họ và tên:{" "}
                 <b>{getRole === "0" ? item.name : "Amy Nguyen"}</b>

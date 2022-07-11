@@ -21,24 +21,18 @@ import { loadSubjects } from "../../../redux/_api/api";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: '#37676d',
     color: theme.palette.common.white,
+    fontSize: 18
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
 }));
 
-const InfoSub = () => {
-  let dispatch = useDispatch();
+const InfoSub = ({subjects}) => {
 
-  const { subjects } = useSelector((state) => state.subject);
 
-  useEffect(() => {
-    dispatch(loadSubjects());
-  }, []);
-
- 
 
   const [open, setOpen] = React.useState(false);
   const [openId, setOpenId] = React.useState(0);
