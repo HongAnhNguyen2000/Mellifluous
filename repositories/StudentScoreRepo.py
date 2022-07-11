@@ -24,11 +24,12 @@ class StudentScoreRepo(BaseRepo):
                 new_stuSubj = {
                     "masoSV": masoSV, 
                     "mamon": course_student["mamon"],
+                    "sotinchi": course_student["sotinchi"],
                     "semester": int(semester),
                     "mid_grade": 0.0,
                     "final_grade": 0.0,
                     'diemso': 0.0,
-                    'diemchu': 'F'
+                    'diemchu': 'F',
                 }
                 self.collection.insert_one(new_stuSubj)
 
@@ -37,7 +38,7 @@ class StudentScoreRepo(BaseRepo):
         # print(list1)
         return list1
     
-    def update_student_score(self, id: str, new_score: Update_Score_mid_final = Body(...)):
+    def update_student_score(self, maSV: str, mamon: str, semester:str, new_score: Update_Score_mid_final):
 
         def diem(mid_grade, final_grade):
             final = mid_grade*0.3 + final_grade*0.7
@@ -70,7 +71,7 @@ class StudentScoreRepo(BaseRepo):
 
         
         score = {k: v for k, v in new_score.dict().items() if v is not None}
-        # print(score)
+        # print(new_score.dict())
         # return '101'
         diemso = diem(float(score['mid_grade']),float(score['final_grade']))[0]
         diemchu = diem(float(score['mid_grade']),float(score['final_grade']))[1]
@@ -80,15 +81,15 @@ class StudentScoreRepo(BaseRepo):
                     'diemso': diemso,
                     'diemchu': diemchu
                 }
-        update_result = self.collection.update_one({"_id": ObjectId(id)}, {"$set": newScore})
+        update_result = self.collection.update_one({"masoSV": maSV, "mamon": mamon, "semester": int(semester)}, {"$set": newScore})
        
         if update_result.modified_count == 1:
                 if (
-                    updated_st := self.collection.find_one({"_id": ObjectId(id)})
+                    updated_st := self.collection.find_one({"masoSV": maSV, "mamon": mamon, "semester": int(semester)})
                 ) is not None:
                     return updated_st
         
-        if (existing_st := self.collection.find_one({"_id": ObjectId(id)})) is not None:
+        if (existing_st := self.collection.find_one({"masoSV": maSV, "mamon": mamon, "semester": int(semester)})) is not None:
             return existing_st
         
         raise HTTPException(status_code=404, detail=f"Student score {id} not found")

@@ -26,6 +26,7 @@ class Update_Score_mid_final(BaseModel):
 class Update_Score(BaseModel):
     masoSV: str
     mamon: str
+    sotinchi: int
     semester: int
     mid_grade: float
     final_grade: float
@@ -40,6 +41,7 @@ class Update_Score(BaseModel):
             "example": {
                 "masoSV": "20187210",
                 "mamon": "ABC",
+                "sotinchi": "1",
                 "semester": "20211",
                 "mid_grade": "0.0",
                 "final_grade": "0.0",

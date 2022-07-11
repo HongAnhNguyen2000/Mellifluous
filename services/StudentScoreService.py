@@ -14,8 +14,8 @@ class StudentScoreService:
         res = self.repo.create_student_score(masoSV, semester)
         return res
     
-    def update_student_score(self, id: str, score: Update_Score = Body(...)):
-        res = self.repo.update_student_score(id, score)
+    def update_student_score(self, maSV: str, mamon:str, semester: str, score: Update_Score = Body(...)):
+        res = self.repo.update_student_score(maSV, mamon, semester, score)
         return res
     
     def get_all(self):

@@ -25,13 +25,13 @@ class StudentGPARepo(BaseRepo):
         else:
             scoreSubject = list(self.subcollection.find({"masoSV": masoSV, "semester": int(semester)}))
             # print(scoreSubject)
-            n = 0
+            sotinchi = 0
             total = 0
             for score in scoreSubject:
-                total += score['diemso']
-                
-                n += 1
-            gpa = total/n
+                # print(score)
+                total += score['diemso'] * score['sotinchi']
+                sotinchi += score['sotinchi']
+            gpa = total/sotinchi
             new_gpa_semester = {
                 "masoSV": masoSV,
                 "GPA": gpa,
@@ -40,9 +40,7 @@ class StudentGPARepo(BaseRepo):
             }
             self.collection.insert_one(new_gpa_semester)
         
-        res = list(self.collection.find({"masoSV": masoSV})) 
-        GPA_by_student = [StudentGPAUtils().format_GPA(response) for response in res]
-        return GPA_by_student
+        return 'created Success'
     
     def get_student_GPA_rank(self, semester: str):
         res = self.collection.find({"semester": int(semester)}).sort("GPA", -1)
