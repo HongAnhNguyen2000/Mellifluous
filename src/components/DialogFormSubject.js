@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from "react";
-import {
-  TextField,
-  Box,
-=======
 import React, { useEffect } from "react";
 import {
   TextField,
   Stack,
->>>>>>> master
   Button,
   Dialog,
   DialogActions,
@@ -21,23 +14,6 @@ import * as Yup from "yup";
 import { useFormik, Form, FormikProvider } from "formik";
 
 import { useDispatch } from "react-redux";
-<<<<<<< HEAD
-
-
-const DialogFormSubject = ({ open }) => {
-  let dispatch = useDispatch();
-
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
-  const InfoSchema = Yup.object().shape({
-    namePerson: Yup.string().required("Please enter your name"),
-    address: Yup.string().required("Please enter your address"),
-    phone: Yup.string()
-      .matches(phoneRegExp, "Invalid phone number")
-      .required("Please enter your phone"),
-    birthday: Yup.date().required("Please enter your birthday"),
-=======
 import { updateSub, loadSubjects, addNewSub } from "../redux/_api/api";
 
 
@@ -51,7 +27,6 @@ const DialogFormSubject = ({ open, setOpen, subject }) => {
     time: Yup.string().required("Nhap thoi gian hoc"),
     teacher: Yup.string().required("Nhap ten giang vien"),
     
->>>>>>> master
   });
 
   const formik = useFormik({

@@ -5,7 +5,7 @@ services:
     command: -H 0.0.0.0 -p 5001 -w db.json
     restart: always
     container_name: api
-    working_dir: /usr/src/app # thư mục lưu trữ 
+    working_dir: /usr/src/app 
     volumes:
       - .:/usr/src/app
     ports:
