@@ -6,6 +6,7 @@ class SubjectUtils:
             "id": str(subject['_id']),
             "mamon": subject['mamon'],
             "name": subject['name'],
+            "semester": subject['semester'],
             "faculity": subject['faculity'],
             "teacher": subject['teacher'],
             "sotinchi": str(subject['sotinchi']),
