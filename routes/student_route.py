@@ -15,6 +15,11 @@ def get_all_student():
     res = StudentService().get_all_student()
     return res
 
+@router.get('/get-by-id/{maSV}')
+def get_by_id(maSV: str):
+    res = StudentService().get_student_by_id(maSV)
+    return res
+
 
 @router.put('/update_student/{id}', response_model=Student)
 def update_student(id: str, student: UpdatedStudent = Body(...)):

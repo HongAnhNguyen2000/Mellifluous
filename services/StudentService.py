@@ -19,6 +19,10 @@ class StudentService:
         res = self.repo.get_all_students()
         return res
     
+    def get_student_by_id(self, maSV: str):
+        res = self.repo.get_student_by_id(maSV)
+        return res
+    
     def update_student(self, id: str, student: UpdatedStudent = Body(...)):
         res = self.repo.update_student(id, student)
         return res

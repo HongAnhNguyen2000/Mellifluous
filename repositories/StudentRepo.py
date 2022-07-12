@@ -23,8 +23,14 @@ class StudentRepo(BaseRepo):
         
         return list1
     
+    def get_student_by_id(self, maSV: str):
+        res = self.collection.find_one({"maSV": maSV})
+        student = StudentUtils().format_student(res)
+        return student
+    
     def update_student(self, id: str, new_student: UpdatedStudent = Body(...)):
         student = {k: v for k, v in new_student.dict().items() if v is not None}
+        # print(type(student))
         if len(student) >=1:
             update_result = self.collection.update_one({"_id": id}, {"$set": student})
             if update_result.modified_count == 1:
