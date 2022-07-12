@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { ThemeProvider } from "@mui/private-theming";
 import React from "react";
+=======
+import React, { useEffect } from "react";
+import { ThemeProvider } from "@mui/private-theming";
+>>>>>>> master
 import DashboardContent from "./Dashboard";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,6 +19,9 @@ import FinalSub from "./Subject/FinalSub";
 import Grid from "@mui/material/Grid";
 import InfoTeach from "./Subject/InfoTeach";
 
+import { useDispatch, useSelector } from "react-redux";
+import { loadSubjects} from '../../redux/_api/api'
+
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -22,11 +30,19 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const ContainerSubject = () => {
+  let dispatch = useDispatch();
+
+  const { subjects } = useSelector((state) => state.subject);
+
+  useEffect(()=> {
+    dispatch(loadSubjects());
+  },[])
+
   return (
     <ThemeProvider>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         <CssBaseline />
-        <DashboardContent />
+        <DashboardContent selectedItem='2' />
         <Box
           component="main"
           sx={{
@@ -39,15 +55,15 @@ const ContainerSubject = () => {
             overflow: "auto",
           }}
         >
-          <Toolbar />
+          
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container>
               <Grid item xs={8} paddingRight={4}>
-                <InfoSub />
+                <InfoSub subjects={subjects} />
               </Grid>
               <Grid item xs={4}>
                 <Stack direction="column" spacing={4}>
-                  <InfoTeach />
+                  <InfoTeach subjects={subjects} />
                   <FinalSub />
                 </Stack>
               </Grid>

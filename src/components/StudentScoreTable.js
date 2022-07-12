@@ -4,7 +4,7 @@ import {  Typography, TableCell, TableRow, TableBody,  TextField } from '@mui/ma
 const StudentScoreTable = ({studentScore, onChangeMidScoreItem, onChangeEndScoreItem}) => {
   return (
     <TableBody >
-    { studentScore.map((student) => 
+    { studentScore && studentScore.map((student) => 
         
                 
                 <TableRow key={student.id}>

@@ -22,83 +22,56 @@ import { useSnackbar } from "notistack";
 
 import { styled } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import { loadSubjects, deleteSub } from "../../redux/_api/api";
-=======
-import { loadSubjects, deleteSub, getSub } from "../../redux/_api/api";
->>>>>>> master
+import { loadSubjects, deleteSub, getStudentById, getStudent } from "../../redux/_api/api";
 import DashboardContent from "./Dashboard";
-import DialogFormSubject from "../../components/DialogFormSubject";
+
+import DialogFormManageStudent from "../../components/DialogFormManageStudent";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-<<<<<<< HEAD
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-=======
     backgroundColor: "#2a4d5d",
     color: theme.palette.common.white,
     fontSize:16,
     fontWeight: 700
->>>>>>> master
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
   },
 }));
 
-const ContainerManageSubject = () => {
+const ContainerManageStudent = () => {
   let dispatch = useDispatch();
 
-  const { subjects } = useSelector((state) => state.subject);
-  const {subject} = useSelector((state) => state.subject);
+  const { infos } = useSelector((state) => state.info);
+  const { info } = useSelector((state) => state.info);
 
   const [addMode, setAddMode] = useState(false);
   const [open, setOpen] = useState(false);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
  
- 
 
-  const deleteSubject = (id) => {
-    dispatch(deleteSub(id));
-    dispatch(loadSubjects());
-    enqueueSnackbar("DELETE SUCCESS", {
-      variant: "success",
-      action: (key) => (
-        <IconButton
-          size="small"
-          onClick={() => {
-            closeSnackbar(key);
-          }}
-        >
-          x
-        </IconButton>
-      ),
-    });
-    
-  };
 
-  const handleUpdateSubject = (id) => {
+  const handleUpdateStudent = (id) => {
     setOpen(true);
-    dispatch(getSub(id))
-    setAddMode(false)
+    dispatch(getStudentById(id));
+
   }
 
-  const handleAddNewSubject = () => {
+  const handleAddNewStudent = () => {
     setOpen(true);
    setAddMode(true);
   }
 
   useEffect(() => {
-    dispatch(loadSubjects());
+    dispatch(getStudent());
   }, []);
 
   return (
     <ThemeProvider >
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <DashboardContent selectedItem='4' />
+        <DashboardContent selectedItem='5' />
         <Box
           component="main"
           sx={{
@@ -111,10 +84,10 @@ const ContainerManageSubject = () => {
         
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Stack direction="column" spacing={2}>
-              <Typography variant="h3" sx={{textAlign:"center", color: "#2a4d5d"}}>Quản lý môn học</Typography>
-              <Button variant="contained" color="primary" sx={{ width: "200px", backgroundColor: '#f4b367', color: "black" }} onClick={() => {handleAddNewSubject()}}>
+              <Typography variant="h3" sx={{textAlign:"center", color: "#2a4d5d"}}>Quản lý sinh viên</Typography>
+              <Button variant="contained"  sx={{ width: "200px" }} onClick={() => {handleAddNewStudent()}}>
                 
-                +ADD SUBJECT
+                + THÊM SINH VIÊN
               </Button>
               <TableContainer sx={{ paddingLeft: "0px" }}>, 
                 <Table
@@ -129,35 +102,52 @@ const ContainerManageSubject = () => {
                 >
                   <TableHead>
                     <TableRow>
-                      <StyledTableCell>Mã môn</StyledTableCell>
-                      <StyledTableCell align="center">Tên môn</StyledTableCell>
+                      <StyledTableCell>Mã SV</StyledTableCell>
+                      <StyledTableCell align="center">Tên SV</StyledTableCell>
                       <StyledTableCell align="center">
-                        Số tín chỉ
+                        Giới tính
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        Thời gian học
+                        Khóa học
                       </StyledTableCell>
                       <StyledTableCell align="center">
-                        Giảng viên
+                        Lớp học
+                      </StyledTableCell>
+
+                      <StyledTableCell align="center">
+                        Trạng thái
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
+                        Email SV
                       </StyledTableCell>
                       <StyledTableCell />
                     </TableRow>
                   </TableHead>
-                  {subjects &&
-                    subjects.map((subject) => (
-                      <TableBody sx={{ maxHeight: "300px" }} key={subject.id}>
+                  {infos.length>0 &&
+                    infos.map((item) => (
+                      <TableBody sx={{ maxHeight: "300px" }} key={item.id}>
                         <TableRow>
                          
                           <TableCell component="th" scope="row" align="center">
-                            {subject.mamon}
+                            {item.maSV}
                           </TableCell>
-                          <TableCell align="center">{subject.name}</TableCell>
+                          <TableCell align="center">{item.name}</TableCell>
                           <TableCell align="center">
-                            {subject.sotinchi}
+                            {item.gender}
                           </TableCell>
-                          <TableCell align="center">{subject.time}</TableCell>
+                          
                           <TableCell align="center">
-                            {subject.teacher}
+                            {item.khoahoc}
+                          </TableCell>
+                          <TableCell align="center">
+                            {item.className}
+                          </TableCell>
+
+                          <TableCell align="center">
+                            {item.isLearning}
+                          </TableCell>
+                          <TableCell align="center">
+                            {item.email}
                           </TableCell>
                           <TableCell>
                             <Stack
@@ -166,18 +156,11 @@ const ContainerManageSubject = () => {
                               alignItems="center"
                               justifyContent="center"
                             >
-                              <Button variant="outlined" color="success" onClick={() => {handleUpdateSubject(subject.id)}}>
-                                Edit
+                              <Button variant="outlined" color="success" onClick={() => {handleUpdateStudent(item.maSV)}}>
+                                Sửa
                                 
                               </Button>
-                             
-                              <Button
-                                variant="contained"
-                                color="error"
-                                onClick={() => deleteSubject(subject.id)}
-                              >
-                                Delete
-                              </Button>
+
                             </Stack>
                           </TableCell>
                          
@@ -187,7 +170,8 @@ const ContainerManageSubject = () => {
                 </Table>
                 
               </TableContainer>
-              <DialogFormSubject open={open}  setOpen={setOpen} subject={addMode ? {} : subject} />
+              <DialogFormManageStudent open={open} setOpen={setOpen} info={addMode ? {} : info} addMode={addMode} />
+              {/* <DialogFormSubject open={open}  setOpen={setOpen} subject={addMode ? {} : subject} /> */}
             </Stack>
            
             
@@ -199,4 +183,4 @@ const ContainerManageSubject = () => {
   );
 };
 
-export default ContainerManageSubject;
+export default ContainerManageStudent;

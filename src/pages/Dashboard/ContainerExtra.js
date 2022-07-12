@@ -20,7 +20,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { ThemeProvider } from "@mui/private-theming";
 import DashboardContent from "./Dashboard";
-import DialogOpen from "./Extra/index";
+import { IconRanking } from "./Extra/index";
 import { makeStyles } from "@mui/styles";
 
 import axios from "axios";
@@ -28,42 +28,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { loadExtras, loadAsyncExtras} from "../../redux/_api/api";
 
-const useStyles = makeStyles(() => ({
-  StyledBackground: {
-    position: "absolute",
-    zIndex: -1,
-    width: "90%",
-    left: "6%",
-    top: "3%",
-    borderRadius: "5%",
-  },
-}));
 
 const ContainerExtra = () => {
   let dispatch = useDispatch();
-  const [data, setData] = React.useState();
-  const classes = useStyles();
+
+
   const [open, setOpen] = React.useState(false);
   const [state, setState] = React.useState(false);
-  const [error, setError] = React.useState("")
-  const handleClose = (event, reason) => {
-    if (reason !== "clickaway") {
-      setState(false);
-    }
-  };
 
-
-  const GetShow = (id) => {
-    console.log(id);
-    axios
-      .get(`http://localhost:5001/extra/${id}`)
-      .then((resp) => {
-        setData(resp.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const { extra } = useSelector((state) => state.extra);
 
@@ -84,7 +56,7 @@ const ContainerExtra = () => {
     <ThemeProvider>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <DashboardContent />
+        <DashboardContent selectedItem = '3'/>
         <Box
           component="main"
           sx={{
@@ -98,151 +70,59 @@ const ContainerExtra = () => {
             positionn: "relative",
           }}
         >
-          <Toolbar />
+         
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Typography variant="h3" sx={{textAlign:"center",color: '#c89231', mb: 6}}> Xếp hạng GPA kì 20211</Typography>
             <Grid container spacing={3}>
-              <Grid item xs={12} md={12} lg={12}>
-                <h1>{error}</h1>
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="center"
-                  spacing={3}
-                >
-                  <Box sx={{ position: "relative" }}>
+              <Grid item xs={6} md={6} lg={6}>
+               
                     <Stack
                       direction="column"
                       spacing={1}
                       justifyContent="center"
-                      sx={{
-                        position: "absolute",
-                        width: "88%",
-                        left: "6%",
-                        top: "17%",
-                      }}
+                     
                     >
                       {extra &&
-                        extra.map((item) => (
+                        extra.map((item, index) => (
                           <Button
                             variant="contained"
-                            color={item.coloR}
+                            sx={{color: '#ffbc42',
+                            backgroundColor : "#373a45"}}
+                            
                             key={item.id}
-                            onClick={() => GetShow(item.id)}
+                            
                           >
-                            <Stack
-                              direction="row"
-                              spacing={2}
-                              justifyContent="center"
-                              alignItems="center"
-                            >
-                              <FavoriteIcon />
-                             <Stack direction="column">
-                              <Typography variant="caption">
+                          <Grid container>
+                              <Grid item xs={2}>
+                              <Typography >
+                                {index+1}
+                              </Typography>
+                              </Grid>
+                              <Grid item xs={2}>
+                              <Typography >
+                                {item.masoSV}
+                              </Typography>
+                              </Grid>
+                              <Grid item xs={5} sx={{justifyContent: "flex-start", textAlign: "left"}}>
+                              <Typography>
                                 {item.name}
                               </Typography>
-                              <Typography>
-                                {item.deadline}
+                              </Grid>
+                              <Grid item xs={3}>
+                              <Typography >
+                                {item.GPA}
                               </Typography>
-                              </Stack>
-                            </Stack>
+                              </Grid>
+                              
+                              </Grid>
                           </Button>
                         ))}
                     </Stack>
 
-                    <img
-                      src="/static/extra/background.png"
-                      className={classes.StyledBackground}
-                    />
-                    <img src="https://i.pinimg.com/564x/71/39/31/713931058d5a8caedd3af581c46d0dff.jpg" alt="" />
-                  </Box>
-                  {data && (
-                    <Box
-                      // border={color}
-                      sx={{ minWidth: 275, boxShadow: `5px 5px 5px 5px  ` }}
-                    >
-                      <Card variant="contained">
-                        <CardContent>
-                          <Typography
-                            sx={{ fontSize: 16 }}
-                            color={data.color}
-                            gutterBottom
-                          >
-                            Công tác sinh viên
-                          </Typography>
-
-                          <Typography variant="h5" component="div">
-                            {data.name}
-                          </Typography>
-                          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            {data.deadline}
-                          </Typography>
-                        </CardContent>
-
-                        <CardContent sx={{ textAlign: "left" }}>
-                          <Typography variant="body2">
-                            Thời gian : {data.when}
-                            <br />
-                            Địa điểm : {data.where}
-                            <br />
-                            Thuộc tổ chức : {data.what}
-                            <br />
-                            Hạn nộp MC : {data.deadline}
-                          </Typography>
-                          <Typography variant="body2" color="red">
-                            Tiêu chí ứng với hoạt động
-                          </Typography>
-                          <Typography variant="body2">
-                            <b>Thông tin chi tiết:</b>
-                            <br />
-                            1. Đối tượng tham gia : {data.people}
-                            <br />
-                            2. Thời gian tham gia : {data.time}
-                            <br />
-                            3. Cách thức tham gia :
-                            <br />- {data.how}
-                            <br />
-                            {data.morehow}
-                            <br />
-                            4. Cách thức phê duyệt
-                            <br />- {data.accept}
-                          </Typography>
-                        </CardContent>
-
-                        <Button
-                          variant="contained"
-                          
-                          onClick={() => setOpen(true)}
-                          sx={{
-                            backgroundColor: data.color,
-                            marginBottom: "10px",
-                            marginLeft: "30%"
-                          }}
-                        >
-                          Nộp minh chứng
-                        </Button>
-                        <DialogOpen
-                          open={open}
-                          setState={setState}
-                          setOpen={setOpen}
-                          status={data.status}
-                        ></DialogOpen>
-                        <Snackbar
-                          open={state}
-                          autoHideDuration={1000}
-                          onClose={handleClose}
-                        >
-                          <Alert
-                            severity="success"
-                            sx={{ width: "100%" }}
-                            onClose={handleClose}
-                          >
-                            Gửi ảnh lên thành công,BTC sẽ duyệt và trả kết quả
-                            cho bạn
-                          </Alert>
-                        </Snackbar>
-                      </Card>
-                    </Box>
-                  )}
+              </Grid>
+              <Grid item xs={6} md={6} lg={6}>
+                <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                <IconRanking/>
                 </Stack>
               </Grid>
             </Grid>

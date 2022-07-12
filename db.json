@@ -1,5 +1,8 @@
 {
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   "account": [
     {
       "email": "anh@gmail.com",
@@ -140,7 +143,10 @@
       "point": "B"
     }
   ],
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   "extra": [
     {
       "id": "1",
@@ -280,12 +286,20 @@
           "name": "Student A",
           "id": 1,
           "midscore": 9,
+<<<<<<< HEAD
           "endscore": "3"
+=======
+          "endscore": 3
+>>>>>>> master
         },
         {
           "name": "Student B",
           "id": 2,
+<<<<<<< HEAD
           "midscore": "3",
+=======
+          "midscore": 3,
+>>>>>>> master
           "endscore": 5
         },
         {
@@ -316,7 +330,7 @@
         {
           "name": "Student B",
           "id": 2,
-          "midscore": "3",
+          "midscore": "2",
           "endscore": "4"
         },
         {
@@ -329,7 +343,7 @@
           "name": "Student D",
           "id": 4,
           "midscore": "2",
-          "endscore": "3"
+          "endscore": "4"
         }
       ]
     }

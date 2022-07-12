@@ -12,7 +12,11 @@ import {
 import MuiAlert from "@mui/material/Alert";
 
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import { getStudent } from "../../../redux/_api/api";
+=======
+import { getAdmin, getStudent } from "../../../redux/_api/api";
+>>>>>>> master
 import DialogForm from "./components/Dialog";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -45,80 +49,90 @@ const SelfInfo = ({ getRole }) => {
   };
 
   //Info
-  const { info } = useSelector((state) => state.info);
+  const { infos } = useSelector((state) => state.info);
+  const { admin } = useSelector((state) => state.admin);
+
+  const studentInfo = infos.length> 0 ? infos.find((x) => x.maSV = '20187210') : {};
+
   useEffect(() => {
     dispatch(getStudent());
+    dispatch(getAdmin('HP7212'))
   }, []);
 
   return (
     <Card sx={{ minWidth: 275 }}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={12} lg={4}>
+        <Grid studentInfo xs={12} md={12} lg={4}>
           <CardMedia
             component="img"
-            height="140"
+           
             image="/static/avatars/avatar_24.jpg"
             alt="green iguana"
           ></CardMedia>
         </Grid>
-        <Grid item xs={12} md={12} lg={8}>
-          <CardContent>
-            <Typography variant="h5" component="div">
+        <Grid studentInfo xs={12} md={12} lg={8}>
+          <CardContent sx={{textAlign:"center"}}>
+            <Typography variant="h4" component="div" sx={{color: "rgb(117 188 190)"}}>
               THÔNG TIN CÁ NHÂN
             </Typography>
           </CardContent>
 
           <CardContent>
-            {info && (
+           
               <Typography
-                variant="body1"
+                variant="h6"
                 color="text.secondary"
                 align="justify"
+                key= {studentInfo.maSV}
               >
                 Họ và tên:{" "}
-                <b>{getRole === "0" ? info.namePerson : "Amy Nguyen"}</b>
+                <b>{getRole === "0" ? studentInfo.name : admin.hoten}</b>
                 <br />
                 {getRole === "0" ? (
                   <>
-                    Giới tính : <b>Nữ </b>
+                    Giới tính : <b>{studentInfo.gender}</b>
                     <br />
-                    Ngày sinh: <b>{info.birthday}</b>
+                    Mã Sinh Viên: <b>{studentInfo.maSV}</b>
                     <br />
-                    Năm vào trường: <b>2018</b>
+                    Năm vào trường: <b>{studentInfo.namvaotruong}</b>
                     <br />
-                    Lớp: <b>IT-LTU</b>
+                    Lớp: <b>{studentInfo.className}</b>
                     <br />
-                    Số điện thoại : <b>{info.phone}</b>
+                    Tình trạng học tập : <b>{studentInfo.isLearning}</b>
                     <br />
                     Bậc đào tạo : <b>SIE</b>
                     <br />
-                    Chương trình : <b>Công nghệ thông tin (LTU 15+)</b>
+                    Chương trình : <b>{studentInfo.nganh}</b>
                     <br />
-                    Khoa/Viện quản lý :{" "}
+                    Khoa/Viện quản lý :
                     <b>Viện Công nghệ thông tin và truyền thông</b>
                     <br />
-                    Email: <b>a.nt@sis.hust.edu.vn</b>
+                    Email: <b>{studentInfo.email}</b>
                     <br />
-                    Địa chỉ: <b>{info.address}</b>
+                    Khóa học: <b>{studentInfo.khoahoc}</b>
                     <br />
                   </>
                 ) : (
                   <>
-                    Chức vụ :{" "}
-                    <b>
-                      Phó giám đốc Trung tâm, Trung tâm Hỗ trợ, nghiên cứu, phát
-                      triển và chuyển giao công nghệ Bí thư, Liên chi đoàn
-                      Trường Công nghệ Thông tin và Truyền thông Giảng viên, Bộ
-                      môn Kỹ thuật Máy tính{" "}
-                    </b>
+                  Mã công tác : <b>{admin.macongtac}</b>
+                  <br/>
+                  Nơi công tác: <b>{admin.noicongtac}</b>
+                  <br/>
+                  Khoa: <b>{admin.khoa}</b>
+                  <br/>
+                  Giới tính: <b>{admin.gioitinh}</b>
+                  <br/>
+                  Số điện thoại: <b>{admin.sodienthoai}</b>
+                  <br/>
+                  Email: <b>{admin.email}</b>
                   </>
                 )}
               </Typography>
-            )}
+          
             <br />
             <Button
               sx={{
-                backgroundColor: "#9e1010",
+                backgroundColor: "#75bcbe",
                 color: "white",
                 "&:hover": {
                   backgroundColor: "black",
@@ -132,7 +146,7 @@ const SelfInfo = ({ getRole }) => {
             <DialogForm
               open={open}
               handleClose={handleClose}
-              info={info}
+              info={getRole === '0' ?studentInfo : admin}
               setSnackbar={setSnackbar}
             />
             <Snackbar

@@ -15,35 +15,34 @@ import { useFormik, Form, FormikProvider } from "formik";
 
 import { updateStudent } from "../../../../redux/_api/api";
 import { useDispatch } from "react-redux";
-import CheckboxList from "./CheckboxList";
 
 const DialogForm = ({ open, handleClose, info, setSnackbar }) => {
   let dispatch = useDispatch();
 
-  const phoneRegExp =
-    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
   const InfoSchema = Yup.object().shape({
     namePerson: Yup.string().required("Please enter your name"),
-    address: Yup.string().required("Please enter your address"),
-    phone: Yup.string()
-      .matches(phoneRegExp, "Invalid phone number")
-      .required("Please enter your phone"),
-    birthday: Yup.date().required("Please enter your birthday"),
+    email: Yup.string().email().required("Please enter your address"),
+
+    gender: Yup.string().required("Please enter your birthday"),
   });
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      namePerson: info.namePerson,
-      address: info.address,
-      phone: info.phone,
-      birthday: info.birthday,
+      namePerson: info && info.name,
+
+      gender: info && info.gender,
+      email: info && info.email,
     },
     validationSchema: InfoSchema,
     onSubmit: (values) => {
-      console.log(values);
-      dispatch(updateStudent(values));
+      
+      dispatch(updateStudent({
+        ...info,
+        email : values.email,
+        name: values.namePerson,
+        gender: values.gender
+      }, info.id));
       handleClose();
       setSnackbar({ opening: true, vertical: "top", horizontal: "right" });
     },
@@ -75,45 +74,30 @@ const DialogForm = ({ open, handleClose, info, setSnackbar }) => {
             />
             <TextField
               margin="dense"
-              label="Địa chỉ"
-              name="address"
-              value={values.address}
+              label="Giới tính"
+              name="gender"
+              value={values.gender}
               focused
               onChange={handleChange}
               fullWidth
               variant="standard"
-              error={Boolean(touched.address && errors.address)}
-              helperText={touched.address && errors.address}
+              error={Boolean(touched.gender && errors.gender)}
+              helperText={touched.gender && errors.gender}
             />
             <TextField
               margin="dense"
-              type="number"
-              label="Số điện thoại"
-              name="phone"
-              value={values.phone}
+              type="email"
+              label="Email"
+              name="email"
+              value={values.email}
               focused
               onChange={handleChange}
               fullWidth
               variant="standard"
-              error={Boolean(touched.phone && errors.phone)}
-              helperText={touched.phone && errors.phone}
+              error={Boolean(touched.email && errors.email)}
+              helperText={touched.email && errors.email}
             />
-            <TextField
-              id="input-with-icon-textfield"
-              label="Ngày sinh"
-              name="birthday"
-              value={values.birthday}
-              onChange={handleChange}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start"></InputAdornment>
-                ),
-              }}
-              type="date"
-              fullWidth
-              variant="standard"
-            />
-           <CheckboxList/>
+
           </DialogContent>
           <DialogActions>
             <Button variant="error" onClick={handleClose}>

@@ -143,7 +143,7 @@ const EnhancedTableToolbar = () => {
         pr: { xs: 1, sm: 1 },
         ...{
           bgcolor: "black",
-          color: "pink",
+          color: "#75bcbe",
         },
       }}
     >

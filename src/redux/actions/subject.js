@@ -16,3 +16,13 @@ export const subDelete = (id) => ({
   type: "DELETE_SUB",
   id: id
 })
+
+export const subAdd = () => ({
+  type: "ADD_SUB"
+})
+
+export const subUpdate = () => ({
+  type: "UPDATE_SUB",
+
+})
+

@@ -19,8 +19,17 @@ const subjectReducers = (state = initialState, action) =>{
               loading: false,
             };
           case 'DELETE_SUB' : 
-            return state.filter((item) => item.id !== action.id)
-            
+            return state.filter((item) => item.id !== action.id);
+          case 'ADD_SUB' : 
+            return {
+              ...state,
+              loading: false,
+            }
+          case 'UPDATE_SUB': 
+          return {
+            ...state,
+            loading: false,
+          }
         default:
             return state
     }

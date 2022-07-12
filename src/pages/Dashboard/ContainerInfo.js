@@ -21,7 +21,7 @@ const ContainerInfo = () => {
         <ThemeProvider>
             <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <DashboardContent/>
+            <DashboardContent selectedItem ='0'/>
         <Box
         component="main"
         sx={{
@@ -34,13 +34,13 @@ const ContainerInfo = () => {
           overflow: 'auto',
         }}
       >
-        <Toolbar />
+       
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
             
-            {/* Self Info */}
+          
             
-            <Grid item xs={12} md={12} lg={8}>
+            <Grid item xs={12} md={12} lg={8}> */}
               <Paper
                 sx={{
                   p: 2,
@@ -54,7 +54,7 @@ const ContainerInfo = () => {
                 
                 
               </Paper>
-            </Grid>
+            {/* </Grid>
             
             {getRole === '0' &&(
            
@@ -70,7 +70,7 @@ const ContainerInfo = () => {
               </Paper>
             </Grid>
             )}
-            </Grid>
+            </Grid> */}
         </Container>
       </Box>
       </Box>
