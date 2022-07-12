@@ -10,6 +10,7 @@ import ContainerSubject from './pages/Dashboard/ContainerSubject';
 import ContainerExtra from './pages/Dashboard/ContainerExtra';
 import ContainerManageSubject from "./pages/Dashboard/ContainerManageSubject";
 import ContainRegisSuccess from "./pages/Dashboard/ContainRegisSuccess";
+import ContainerManageStudent from "./pages/Dashboard/ContainerManageStudent";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
        <Route exact path="/extra" component={ContainerExtra}/>
        <Route exact path="/manageSubject" component={ContainerManageSubject} />
        <Route exact path="/regisSuccess" component={ContainRegisSuccess} />
+       <Route exact path="/manageStudent" component={ContainerManageStudent}/>
    
 
      </Switch>

@@ -12,7 +12,7 @@ import {
 import MuiAlert from "@mui/material/Alert";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getStudent } from "../../../redux/_api/api";
+import { getAdmin, getStudent } from "../../../redux/_api/api";
 import DialogForm from "./components/Dialog";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -45,13 +45,14 @@ const SelfInfo = ({ getRole }) => {
   };
 
   //Info
-  const { info } = useSelector((state) => state.info);
-  const studentInfo = info.length> 0 ? info.find((x) => x.maSV = '20187210') : {};
+  const { infos } = useSelector((state) => state.info);
+  const { admin } = useSelector((state) => state.admin);
 
-  
-  
+  const studentInfo = infos.length> 0 ? infos.find((x) => x.maSV = '20187210') : {};
+
   useEffect(() => {
     dispatch(getStudent());
+    dispatch(getAdmin('HP7212'))
   }, []);
 
   return (
@@ -81,7 +82,7 @@ const SelfInfo = ({ getRole }) => {
                 key= {studentInfo.maSV}
               >
                 Họ và tên:{" "}
-                <b>{getRole === "0" ? studentInfo.name : "Amy Nguyen"}</b>
+                <b>{getRole === "0" ? studentInfo.name : admin.hoten}</b>
                 <br />
                 {getRole === "0" ? (
                   <>
@@ -109,13 +110,17 @@ const SelfInfo = ({ getRole }) => {
                   </>
                 ) : (
                   <>
-                    Chức vụ :{" "}
-                    <b>
-                      Phó giám đốc Trung tâm, Trung tâm Hỗ trợ, nghiên cứu, phát
-                      triển và chuyển giao công nghệ Bí thư, Liên chi đoàn
-                      Trường Công nghệ Thông tin và Truyền thông Giảng viên, Bộ
-                      môn Kỹ thuật Máy tính{" "}
-                    </b>
+                  Mã công tác : <b>{admin.macongtac}</b>
+                  <br/>
+                  Nơi công tác: <b>{admin.noicongtac}</b>
+                  <br/>
+                  Khoa: <b>{admin.khoa}</b>
+                  <br/>
+                  Giới tính: <b>{admin.gioitinh}</b>
+                  <br/>
+                  Số điện thoại: <b>{admin.sodienthoai}</b>
+                  <br/>
+                  Email: <b>{admin.email}</b>
                   </>
                 )}
               </Typography>
@@ -137,7 +142,7 @@ const SelfInfo = ({ getRole }) => {
             <DialogForm
               open={open}
               handleClose={handleClose}
-              info={studentInfo}
+              info={getRole === '0' ?studentInfo : admin}
               setSnackbar={setSnackbar}
             />
             <Snackbar

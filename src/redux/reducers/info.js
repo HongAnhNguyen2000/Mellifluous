@@ -1,4 +1,5 @@
 const initialState = {
+    infos:[],
     info: {},
     loading: true
 }
@@ -8,14 +9,25 @@ const infoReducers = (state = initialState, action) =>{
         case 'GET_INFO':
             return {
               ...state,
-              info: action.payload,
+              infos: action.payload,
               loading: false,
             };
+        case 'GET_INFO_BY_ID':
+              return {
+                ...state,
+                info: action.payload,
+                loading: false,
+              };
           case 'UPDATE_INFO':
             return {
               ...state,
               loading: false,
             };
+          case 'ADD_INFO': 
+          return {
+            ...state,
+            loading:false
+          }
         default:
             return state
     }

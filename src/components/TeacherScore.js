@@ -71,7 +71,7 @@ const TeacherScore = () => {
                   <Button variant="contained" onClick={()=> handleClickDialog(subject.id)}>UPDATE ENDSCORE</Button>
                   }
 
-<DialogSubmitScore open={open} onClose={()=> setOpen(false)} id= {subject.id} />
+                  <DialogSubmitScore open={open} onClose={()=> setOpen(false)} id= {subject.id} />
                   
                   </TableCell>
                   </TableBody>

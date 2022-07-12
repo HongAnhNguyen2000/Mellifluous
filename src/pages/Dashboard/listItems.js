@@ -46,7 +46,7 @@ const MainListItems = ({selectedItem}) =>{
     <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
         <BarChartIcon />
     </Avatar>
-      <ListItemText primary="Kết quả học tập" />
+      <ListItemText primary= {getRole === '0' ? "Kết quả học tập" : "Quản lý điểm"} />
     </ListItemButton>
 
     
@@ -77,6 +77,12 @@ const MainListItems = ({selectedItem}) =>{
           <LayersIcon />
       </Avatar>
         <ListItemText primary="Quản lý môn học" />
+      </ListItemButton>
+      <ListItemButton  onClick={()=> history.push("/manageStudent")} selected= {selectedItem === '5'}>
+      <Avatar sx={{ m: 1,  bgcolor: 'white',color:'black' }}>
+          <LayersIcon />
+      </Avatar>
+        <ListItemText primary="Quản lý sinh viên" />
       </ListItemButton>
     </>
     )}

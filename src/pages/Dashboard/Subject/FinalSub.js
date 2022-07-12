@@ -60,7 +60,7 @@ const FinalSub = () => {
 
   const [open, setOpen] = React.useState(false);
   const [transition, setTransition] = React.useState(undefined);
-  const GetId = regis.map((regi)=>regi.id);
+ 
   
  
 
@@ -119,7 +119,7 @@ const FinalSub = () => {
                       <TableCell align="center">{regi.mamon}</TableCell>
                       <TableCell align="center">{regi.sotinchi}</TableCell>
                       <TableCell align="center">
-                        <Button onClick={() => onChangeDelete(regi.id)}>
+                        <Button onClick={() => onChangeDelete(regi.mamon)}>
                           <DeleteIcon />
                         </Button>
                         

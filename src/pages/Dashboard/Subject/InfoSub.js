@@ -31,6 +31,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const InfoSub = ({subjects}) => {
+  console.log(subjects)
 
 
 

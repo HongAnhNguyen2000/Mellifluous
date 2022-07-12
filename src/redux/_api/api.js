@@ -13,6 +13,29 @@ export const loadAccount = () => {
   };
 };
 
+//Admin 
+export const getAdmin = (id) => {
+  return function (dispatch) {
+    axios.get(`http://localhost:8000/admin/get_by_id/${id}`)
+    .then((resp) => {
+      dispatch(action.loadAdmin(resp.data))
+
+    })
+    .catch((error) => console.log(error))
+  }
+}
+export const updateAdmin = (info, id) => {
+  return function (dispatch) {
+    axios
+      .put(`http://localhost:8000/student/update_admin/${id}`, info)
+      .then(() => {
+        dispatch(action.AdminUp());
+        dispatch(getAdmin(id));
+      })
+      .catch((error) => console.log(error));
+  };
+};
+
 //Student
 export const getStudent = () => {
   return function (dispatch) {
@@ -24,6 +47,16 @@ export const getStudent = () => {
       .catch((error) => console.log(error));
   };
 };
+export const getStudentById = (id) =>{
+  return function (dispatch) {
+    axios.get(`http://localhost:8000/student/get-by-id/${id}`)
+    .then((resp) => {
+      dispatch(action.getInfoById(resp.data));
+
+    })
+    .catch((error) => console.log(error))
+  }
+}
 export const updateStudent = (info, id) => {
   return function (dispatch) {
     axios
@@ -35,6 +68,16 @@ export const updateStudent = (info, id) => {
       .catch((error) => console.log(error));
   };
 };
+export const addStudent = (student) => {
+  return function (dispatch) {
+    axios.post("http://localhost:8000/student/create",student)
+    .then(() => {
+      dispatch(action.addInfo());
+      dispatch(getStudent());
+    })
+    .catch((error) =>  console.log(error))
+  }
+}
 
 //transcript
 export const loadTranscripts = () => {
@@ -117,7 +160,7 @@ export const regisAdd = (studentId, subjectId) => {
 export const regisDelete = (studentId, subjectId) => {
   return function (dispatch) {
     axios
-      .delete(`http://localhost:8000/student_course/delete/${studentId}&${subjectId}/20211`)
+      .put(`http://localhost:8000/student_course/delete/${studentId}&${subjectId}/20211`)
       .then((resp) => {
         dispatch(action.deleRegis(resp.data));
         dispatch(loadRegis());
@@ -141,7 +184,7 @@ export const loadRegis = () => {
 export const loadExtras = (onSuccess, onError) => {
   return ((dispatch)=>{
     axios
-      .get("http://localhost:5001/extra")
+      .get("http://localhost:8000/student_score/get_rank_GPA_student/20211")
       .then((resp) => {
         dispatch(action.getExtras(resp.data))
         onSuccess && onSuccess(resp.data)
@@ -151,20 +194,6 @@ export const loadExtras = (onSuccess, onError) => {
       
   })}
 
-//use async await
-export const loadAsyncExtras = async(onSuccess, onError) =>{
-  try{
-  const {resp} = await axios.get("http://localhost:5001/extra");
-  return (dispatch) => {
-  dispatch(action.getExtras(resp.data))
-  onSuccess && onSuccess(resp.data)
-  return resp.data
-  }
-  }catch(error){
-    onError && onError(error)
-  }
-
-}
 
 
 
@@ -226,4 +255,15 @@ export const getTeacherSubId = (id) => {
   };
 };
 
-
+//manageStudent
+export const loadManageStudent = () => {
+  return function (dispatch) {
+    axios
+      .get("http://localhost:8000/student/get_all")
+      .then((resp) => {
+        dispatch(action.subGet(resp.data));
+       
+      })
+      .catch((error) => console.log(error));
+  };
+};

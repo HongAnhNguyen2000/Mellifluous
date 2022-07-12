@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import accountReducers from "./reducers/account";
+import adminReducers from "./reducers/admin";
 import extraReducers from "./reducers/extra";
 import infoReducers from "./reducers/info";
 import regisReducers from "./reducers/regis";
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
  regis: regisReducers,
  subject: subjectReducers,
  transcript: transcriptReducers,
- teacherSubject: teacherReducer
+ teacherSubject: teacherReducer,
+ admin : adminReducers
 });
 
 export default rootReducer;
