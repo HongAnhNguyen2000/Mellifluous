@@ -9,6 +9,8 @@ class StudentScoreRepo(BaseRepo):
         super().__init__()
         self.collection = self.db.get_collection(collection)
         self.studentcoursecollection = self.db.get_collection("student_course")
+        self.subjcollection = self.db.get_collection("subjects")
+
     
     def create_student_score(self, masoSV: str, semester: str):
 
@@ -102,6 +104,13 @@ class StudentScoreRepo(BaseRepo):
     
     def get_student_score_by_id(self, masoSV: str):
         res = list(self.collection.find({"masoSV": masoSV}))
-        list1 = [StudentScoreUtils().format_student_score(response) for response in res]
+        list1 = []
+        for response in res:
+            element = StudentScoreUtils().format_student_score(response)
+            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['mamon']
+            element['tenmon']= subjectname
+            list1.append(element)
+            
+        # list1 = [StudentScoreUtils().format_student_score(response) for response in res]
         
         return list1
