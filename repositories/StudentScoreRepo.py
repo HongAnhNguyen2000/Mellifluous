@@ -98,7 +98,12 @@ class StudentScoreRepo(BaseRepo):
     
     def get_all_student_score(self):
         res = list(self.collection.find({}))
-        list1 = [StudentScoreUtils().format_student_score(response) for response in res]
+        list1 = []
+        for response in res:
+            element = StudentScoreUtils().format_student_score(response)
+            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['mamon']
+            element['tenmon']= subjectname
+            list1.append(element)
         
         return list1
     
