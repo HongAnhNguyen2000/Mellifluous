@@ -101,7 +101,7 @@ class StudentScoreRepo(BaseRepo):
         list1 = []
         for response in res:
             element = StudentScoreUtils().format_student_score(response)
-            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['mamon']
+            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['name']
             element['tenmon']= subjectname
             list1.append(element)
         
@@ -112,7 +112,7 @@ class StudentScoreRepo(BaseRepo):
         list1 = []
         for response in res:
             element = StudentScoreUtils().format_student_score(response)
-            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['mamon']
+            subjectname = self.subjcollection.find_one({"mamon": element['mamon']})['name']
             element['tenmon']= subjectname
             list1.append(element)
             
