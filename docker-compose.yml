@@ -1,0 +1,45 @@
+version: "3.5"
+services:
+  react-app:
+    image: client:v1
+    stdin_open: true 
+    ports:
+      - "3000:3000"
+    networks:
+      - student-app
+
+  json-db:
+    image: json_db:v1
+    ports:
+      - "5001:3000"
+    networks:
+      - student-app
+    
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - student-app
+    volumes:
+      - mongo-data:/data/db
+
+  api-server:
+    image: backend:v1
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - student-app
+  
+networks:
+  student-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local 
+  
+
+    
+
