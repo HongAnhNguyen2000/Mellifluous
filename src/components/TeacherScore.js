@@ -1,8 +1,9 @@
 import { Typography,Box, TableContainer, TableHead, Table, TableCell, TableRow, TableBody, experimentalStyled as styled, tableCellClasses, Button  } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { getTeacherSubject, getTeacherSubId } from '../redux/_api/api';
+import { loadTranscripts, getTeacherSubId } from '../redux/_api/api';
 import DialogSubmitScore from './DialogSubmitScore';
+import { keyBy, groupBy } from 'lodash';
 
 const RootStyle = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -13,7 +14,7 @@ const RootStyle = styled(Box)(({ theme }) => ({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#2a4d5d",
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
@@ -25,53 +26,70 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const TeacherScore = () => {
   let dispatch = useDispatch();
 
-  const { TeacherSubject } = useSelector((state) => state.teacherSubject);
+  const { transcripts } = useSelector((state) => state.transcript);
+
+  const semesterTranscripts = transcripts ? transcripts.filter((item) => item.semester === '20212' ) : [];
   
   const [open, setOpen] = useState(false);
-  const [dialogId, setDialogId] = useState(null);
+  const [dialogSubject, setDialogSubject] = useState([])
+
+  const arrayUniqueByKey = semesterTranscripts.reduce((group, newArray) => {
+    const {mamon} = newArray;
+    group[mamon] = group[mamon] ?? [];
+    group[mamon].push(newArray);
+    return group
+  },{})
+
+
+
 
   const handleClickDialog = (id) =>{
+    console.log(id);
+    
+    let result2 =''
+    const newone = Object.entries(arrayUniqueByKey).find(([key, value]) => {
+    if (key === id) {
+      result2 = value;
+      return true;
+    }
+  
+    return false;
+  });
+  console.log(result2)
+
     setOpen(true);
-    setDialogId(id)
+   setDialogSubject(result2)
   }
 
   useEffect(() => {
-    dispatch(getTeacherSubject())
+    dispatch(loadTranscripts())
   },[])
   return (
     <RootStyle>
-  
+       <Typography variant="h3" sx={{textAlign:"center", color: "#2a4d5d"}}>Quản lý điểm kì 20212</Typography>
     <Box mt={2}>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <StyledTableCell align="left">SubjectId</StyledTableCell>
-                <StyledTableCell align="left">SubjectName</StyledTableCell>
-                <StyledTableCell align="left">SubjectStatus</StyledTableCell>
+                <StyledTableCell align="center"> Mã môn học</StyledTableCell>
+
+                <StyledTableCell align="center"> Cập nhật điểm</StyledTableCell>
               </TableRow>
             </TableHead>
             
-              {TeacherSubject && TeacherSubject.map((subject) =>
+              {Object.keys(arrayUniqueByKey).map((subject) =>
                 <TableBody>
-                  <TableCell align="left">
-                    <Typography>{subject.id}</Typography>
+                  <TableCell align="center">
+                    <Typography>{subject}</Typography>
                   </TableCell>
-                  <TableCell align="left">
-                  <Typography>{subject.subjectName}</Typography>
-                  </TableCell>
-                  <TableCell align="left">
-                  {subject.subjectStatus === 0 &&
-                  <Button variant="outlined" onClick={()=> handleClickDialog(subject.id)}>UPDATE SCORE</Button>
-                  }
-                  {subject.subjectStatus === 1 &&
-                  <Button variant="contained" onClick={()=> handleClickDialog(subject.id)}>UPDATE MIDSCORE</Button>
-                  }
-                  {subject.subjectStatus === 3 &&
-                  <Button variant="contained" onClick={()=> handleClickDialog(subject.id)}>UPDATE ENDSCORE</Button>
-                  }
+                  <TableCell align="center">
+                 
+                  <Button variant="outlined" onClick={()=> handleClickDialog(subject)}>UPDATE SCORE</Button>
+                 
+                 
 
-                  <DialogSubmitScore open={open} onClose={()=> setOpen(false)} id= {subject.id} />
+                  <DialogSubmitScore open={open} onClose={()=> setOpen(false)} dialogSubject={dialogSubject} setDialogSubject={setDialogSubject}/>
                   
                   </TableCell>
                   </TableBody>

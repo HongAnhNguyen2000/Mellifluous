@@ -26,7 +26,7 @@ import { makeStyles } from "@mui/styles";
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loadExtras, loadAsyncExtras} from "../../redux/_api/api";
+import { loadExtras, loadEachExtra} from "../../redux/_api/api";
 
 
 const ContainerExtra = () => {
@@ -37,9 +37,10 @@ const ContainerExtra = () => {
   const [state, setState] = React.useState(false);
 
 
-  const { extra } = useSelector((state) => state.extra);
+  const { extras } = useSelector((state) => state.extra);
+  const {extra} = useSelector((state) => state.extra)
 
-
+  console.log(extra)
  
   useEffect(() => {
      dispatch(loadExtras((data) => {
@@ -49,6 +50,8 @@ const ContainerExtra = () => {
 
     })
     )
+
+    dispatch(loadEachExtra('20187210'));
   }, []);
 
 
@@ -82,8 +85,8 @@ const ContainerExtra = () => {
                       justifyContent="center"
                      
                     >
-                      {extra &&
-                        extra.map((item, index) => (
+                      {extras &&
+                        extras.map((item, index) => (
                           <Button
                             variant="contained"
                             sx={{color: '#ffbc42',
@@ -122,6 +125,19 @@ const ContainerExtra = () => {
               </Grid>
               <Grid item xs={6} md={6} lg={6}>
                 <Stack direction="column" spacing={3} justifyContent="center" alignItems="center">
+                
+                <Card variant="outlined">
+                <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                   Your ranking
+                </Typography>
+                <Typography variant="h5" component="div" sx={{textAlign:"center"}}>
+                  2
+                </Typography>
+
+                </CardContent>
+                </Card>
+
                 <IconRanking/>
                 </Stack>
               </Grid>

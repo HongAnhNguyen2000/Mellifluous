@@ -77,10 +77,10 @@ const headCells = [
     label: "Điểm tổng kết",
   },
   {
-    id: "point",
+    id: "semester",
     numeric: true,
     disablePadding: false,
-    label: "Điểm chữ",
+    label: "Ki hoc",
   },
 ];
 
@@ -162,7 +162,7 @@ const EnhancedTableToolbar = () => {
 export default function EnhancedTable() {
   let dispatch = useDispatch();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("endpoint");
+  const [orderBy, setOrderBy] = React.useState("semester");
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -217,9 +217,11 @@ export default function EnhancedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
+                  const endpoint = row.mid_grade * 0.3 + row.final_grade * 0.7
+                  
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableRow hover tabIndex={-1} key={row.id}>
                       <TableCell padding="checkbox"></TableCell>
                       <TableCell
                         component="th"
@@ -227,12 +229,12 @@ export default function EnhancedTable() {
                         scope="row"
                         padding="none"
                       >
-                        {row.name}
+                        {row.tenmon}
                       </TableCell>
-                      <TableCell align="right">{row.midterm}</TableCell>
-                      <TableCell align="right">{row.endterm}</TableCell>
-                      <TableCell align="right">{row.endpoint}</TableCell>
-                      <TableCell align="right">{row.point}</TableCell>
+                      <TableCell align="right">{row.mid_grade}</TableCell>
+                      <TableCell align="right">{row.final_grade}</TableCell>
+                      <TableCell align="right">{endpoint}</TableCell>
+                      <TableCell align="right">{row.semester}</TableCell>
                     </TableRow>
                   );
                 })}

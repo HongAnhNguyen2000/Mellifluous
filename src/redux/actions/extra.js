@@ -1,7 +1,7 @@
 //GET_EXTRAS
-export const getExtras = (extra) =>({
+export const getExtras = (extras) =>({
     type:'GET_EXTRAS',
-    payload :extra
+    payload :extras
   });
 
 //GET_EXTRA_BY_ID

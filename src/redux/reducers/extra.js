@@ -1,5 +1,6 @@
 const initialState = {
-    extra: [],
+    extras: [],
+    extra: {},
     loading: true
 }
 
@@ -8,7 +9,7 @@ const extraReducers = (state = initialState, action) =>{
         case 'GET_EXTRAS':
       return {
         ...state,
-        extra: action.payload,
+        extras: action.payload,
         loading:false,
       }
     case 'GET_EXTRA':

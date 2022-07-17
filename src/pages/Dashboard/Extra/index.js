@@ -4,6 +4,7 @@ export const IconRanking = () => (
   <svg id="medal"  data-name="medal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 473 473">
   <title>Medal</title>
   <circle cx="235.971" cy="273.007" r="121.689" fill="#d19000" stroke="#a57005" strokeMiterlimit="10" strokeWidth="18"/>
+  <text>2</text>
   <rect className="light"  x="110.246" y="70.854" width="22" height="294.983" transform="translate(111.416 -44.37) rotate(30)" fill="#fafafa" opacity="0.10"/>
   <path d="M250.5,13C119.885,13,14,118.885,14,249.5S119.885,486,250.5,486,487,380.115,487,249.5,381.115,13,250.5,13Zm0,424.324A150.789,150.789,0,1,1,401.289,286.536,150.789,150.789,0,0,1,250.5,437.324Z" transform="translate(-14 -13)" fill="#363a46"/>
   <rect x="196.819" y="116.398" width="78.304" height="12.698" fill="#a57005"/>

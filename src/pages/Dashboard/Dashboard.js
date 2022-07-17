@@ -78,7 +78,7 @@ function DashboardContent({selectedItem}) {
             :
             <Stack direction="row" spacing={2}  alignItems="center" justifyContent="center">
             <Avatar src="/static/avatars/avatar_22.jpg" alt="photoURL" />
-            <Typography> 12 </Typography>
+            <Typography> HP7212 </Typography>
             <Button variant="contained" onClick={onLogOut} sx={{color: "75bcbe"}}>
               <LogoutIcon/>
             </Button>

@@ -83,7 +83,7 @@ export const addStudent = (student) => {
 export const loadTranscripts = () => {
   return function (dispatch) {
     axios
-      .get("http://localhost:5001/transcript")
+      .get("http://localhost:8000/student_score/get_all")
       .then((resp) => {
         dispatch(action.transGet(resp.data));
       })
@@ -199,9 +199,9 @@ export const loadExtras = (onSuccess, onError) => {
 
 export const loadEachExtra = (id) => {
   return function (dispatch) {
-    console.log(id);
+    
     axios
-      .get(`http://localhost:5001/extra/${id}`)
+      .get(`http://localhost:8000/student_score/get_GPA_by_id/${id}`)
       .then((resp) => {
         dispatch(action.getExtra(resp.data));
       })
@@ -221,10 +221,10 @@ export const teacherSubjectAdd = (TeacherSubject) => {
       .catch((error) => console.log(error));
   };
 };
-export const teacherSubjectUpdate = (id, students ) => {
+export const teacherSubjectUpdate = ( mssv, mamon, score ) => {
   return function (dispatch) {
     axios
-      .put(`http://localhost:5001/TeacherSubject/${id}`, students)
+      .put(`http://localhost:8000/student_score/update/${mssv}&${mamon}&20212`, score)
       .then((resp) => {
         dispatch(action.updateTeacherSub());
         dispatch(getTeacherSubject());

@@ -1,26 +1,40 @@
 import React from 'react';
-import {  Typography, TableCell, TableRow, TableBody,  TextField } from '@mui/material'
+import {  Typography,Table, TableCell,TableHead, TableRow, TableBody,  TextField, experimentalStyled as styled, tableCellClasses  } from '@mui/material'
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
 
 const StudentScoreTable = ({studentScore, onChangeMidScoreItem, onChangeEndScoreItem}) => {
   return (
+    <Table>
+              <TableHead>
+              <TableRow>
+                <StyledTableCell align="left">MSSV</StyledTableCell>
+                <StyledTableCell align="left">Điểm giữa kì</StyledTableCell>
+                <StyledTableCell align="left">Điểm cuối kì</StyledTableCell>
+              </TableRow>
+            </TableHead>
     <TableBody >
     { studentScore && studentScore.map((student) => 
         
                 
                 <TableRow key={student.id}>
                   <TableCell align="left">
-                    <Typography>{student.name}</Typography>
+                    <Typography>{student.masoSV}</Typography>
                   </TableCell>
                   <TableCell align="left">
-                  <TextField value={student.midscore} onChange={(e)=> {
-                    onChangeMidScoreItem({id: student.id, value: e.target.value})
-                  }}/>
+                  <TextField type="number" value={student.mid_grade} onChange={(e) => onChangeMidScoreItem({id: student.masoSV, value: e.target.value})}/>
                 
                   </TableCell>
                   <TableCell align="left">
-                  <TextField  value={student.endscore} onChange={(e)=> {
-                    onChangeEndScoreItem({id: student.id, value: e.target.value})
-                  }}/>
+                  <TextField type= "number"  value={student.final_grade} onChange={(e) => onChangeEndScoreItem({id: student.masoSV, value: e.target.value})}/>
                   </TableCell>
                 
                 </TableRow>
@@ -29,6 +43,7 @@ const StudentScoreTable = ({studentScore, onChangeMidScoreItem, onChangeEndScore
             
           )}
     </TableBody>
+    </Table>
   )
 }
 
