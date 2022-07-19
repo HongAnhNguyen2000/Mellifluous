@@ -74,14 +74,15 @@ const headCells = [
     id: "endpoint",
     numeric: true,
     disablePadding: false,
-    label: "Điểm tổng kết",
+    label: "Điểm chữ",
   },
+
   {
     id: "semester",
     numeric: true,
     disablePadding: false,
     label: "Ki hoc",
-  },
+  }
 ];
 
 function EnhancedTableHead(props) {
@@ -217,7 +218,7 @@ export default function EnhancedTable() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const labelId = `enhanced-table-checkbox-${index}`;
-                  const endpoint = row.mid_grade * 0.3 + row.final_grade * 0.7
+                  
                   
 
                   return (
@@ -233,7 +234,7 @@ export default function EnhancedTable() {
                       </TableCell>
                       <TableCell align="right">{row.mid_grade}</TableCell>
                       <TableCell align="right">{row.final_grade}</TableCell>
-                      <TableCell align="right">{endpoint}</TableCell>
+                      <TableCell align="right">{row.diemchu}</TableCell>
                       <TableCell align="right">{row.semester}</TableCell>
                     </TableRow>
                   );

@@ -97,6 +97,7 @@ export const loadSubjects = () => {
       .get("http://localhost:8000/subject/get_all")
       .then((resp) => {
         dispatch(action.subGet(resp.data));
+        console.log(resp.data)
        
       })
       .catch((error) => console.log(error));
@@ -119,6 +120,7 @@ export const deleteSub = (id) => {
     axios.delete(`http://localhost:8000/subject/delete_subject/${id}`)
     .then(() => {
       dispatch(action.subDelete(id));
+      dispatch(loadSubjects())
     })
     .catch((error) =>console.log(error) )
   }

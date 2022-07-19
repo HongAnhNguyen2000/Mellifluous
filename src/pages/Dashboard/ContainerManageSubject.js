@@ -49,11 +49,11 @@ const ContainerManageSubject = () => {
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
  
- 
+ console.log(subject)
 
   const deleteSubject = (id) => {
     dispatch(deleteSub(id));
-    dispatch(loadSubjects());
+
     enqueueSnackbar("DELETE SUCCESS", {
       variant: "success",
       action: (key) => (
@@ -65,14 +65,15 @@ const ContainerManageSubject = () => {
         >
           x
         </IconButton>
-      ),
+      )
+
     });
     
   };
 
   const handleUpdateSubject = (id) => {
     setOpen(true);
-    dispatch(getSub(id))
+    if(id!= null) {dispatch(getSub(id))}
     setAddMode(false)
   }
 
@@ -84,6 +85,8 @@ const ContainerManageSubject = () => {
   useEffect(() => {
     dispatch(loadSubjects());
   }, []);
+
+  console.log(subjects)
 
   return (
     <ThemeProvider >
@@ -178,7 +181,7 @@ const ContainerManageSubject = () => {
                 </Table>
                 
               </TableContainer>
-              <DialogFormSubject open={open}  setOpen={setOpen} subject={addMode ? {} : subject} />
+              <DialogFormSubject open={open}  setOpen={setOpen} subject={(!addMode && subject )  ? subject : {}} />
             </Stack>
            
             
