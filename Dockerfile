@@ -6,7 +6,7 @@ RUN  pip install --upgrade pip
 RUN mkdir /code
 WORKDIR /code
 
-RUN  pip freeze > requirements.txt
+RUN  pip3 freeze > requirements.txt
 
 COPY . /code/
 
