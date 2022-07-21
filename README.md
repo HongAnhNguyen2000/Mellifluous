@@ -13,9 +13,12 @@ BACK_END : FASTAPI
 
 DATABASE: MONGODB
 ----------------------
-Thư mục FRONTEND: branch master
-Thư mục BACKEND : branch backend
-Thư mục DOCKER: branch docker-compose
+Thư mục FRONTEND: 
+branch master
+Thư mục BACKEND : 
+branch backend
+Thư mục DOCKER: 
+branch docker-compose
 -----------------------
 
 AVAILABLE SCRIPTS 
