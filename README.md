@@ -9,7 +9,7 @@ Tên đề tài: Hệ thống quản lý học tập của sinh viên và đăng
 CÁC THƯ VIỆN VÀ NGÔN NGỮ SỬ DỤNG FRONT_END: 
 REACTJS - sử dụng thư viện Material-UI
 
-BACK_END : FASTAPI
+BACK_END : PYTHON FASTAPI
 
 DATABASE: MONGODB
 
