@@ -12,14 +12,12 @@ REACTJS - sử dụng thư viện Material-UI
 BACK_END : FASTAPI
 
 DATABASE: MONGODB
-----------------------
-Thư mục FRONTEND: 
-branch master
-Thư mục BACKEND : 
-branch backend
-Thư mục DOCKER: 
-branch docker-compose
------------------------
+
+THƯ MỤC
++ Thư mục FRONTEND: branch master
++ Thư mục BACKEND : branch backend
++ Thư mục DOCKER: branch docker-compose
+
 
 AVAILABLE SCRIPTS 
 
